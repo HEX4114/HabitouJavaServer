@@ -1,3 +1,5 @@
+package service;
+
 import com.mongodb.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import dao.MongoDBSquareDao;
