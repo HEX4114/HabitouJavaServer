@@ -20,7 +20,8 @@ public class SupermarketConverter {
  
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
                 .append("latitude", s.getLatitude()).append("longitude", s.getLongitude())
-                .append("distance", s.getDistance())
+                .append("distanceOnFoot", s.getDistanceOnFoot())
+                .append("distanceOnCar", s.getDistanceOnCar())
                 .append("name", s.getName());
                 
         if (s.getId() != null)
@@ -31,7 +32,7 @@ public class SupermarketConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Supermarket toSupermarket(DBObject doc) {
-        Supermarket s = new Supermarket((Double) doc.get("latitude"),(Double) doc.get("longitude"),(Double) doc.get("distance"));
+        Supermarket s = new Supermarket((Double) doc.get("latitude"),(Double) doc.get("longitude"),(Double) doc.get("distanceOnFoot"), (Double) doc.get("distanceOnCar"));
         return s;
     }
     

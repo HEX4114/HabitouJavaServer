@@ -8,7 +8,6 @@ package converter;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import model.Atm;
-import org.bson.types.ObjectId;
 
 /**
  *
@@ -22,7 +21,8 @@ public class AtmConverter {
 
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
                 .append("latitude", a.getLatitude()).append("longitude", a.getLongitude())
-                .append("distance", a.getDistance());
+                .append("distanceOnFoot", a.getDistanceOnFoot())
+                .append("distanceOnCar", a.getDistanceOnCar());
 
 //        if (a.getId() != null) {
 //            builder = builder.append("_id", new ObjectId(a.getId()));
@@ -33,7 +33,7 @@ public class AtmConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Atm toAtm(DBObject doc) {
-        Atm a = new Atm((Double) doc.get("latitude"), (Double) doc.get("longitude"), (Double) doc.get("distance"));
+        Atm a = new Atm((Double) doc.get("latitude"), (Double) doc.get("longitude"), (Double) doc.get("distanceOnFoot"), (Double) doc.get("distanceOnCar"));
         return a;
     }
 

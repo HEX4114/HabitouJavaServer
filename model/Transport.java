@@ -16,8 +16,8 @@ public class Transport extends Place {
     
     private TypeTransport typeTransport;
 
-    public Transport(Double latitude, Double longitude, Double distance) {
-        super(latitude, longitude, distance);
+    public Transport(Double latitude, Double longitude, Double distancef, Double distancec) {
+        super(latitude, longitude, distancef, distancec);
     }
 
     public Transport() {

@@ -21,7 +21,8 @@ public class TransportConverter {
 
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
                 .append("latitude", t.getLatitude()).append("longitude", t.getLongitude())
-                .append("distance", t.getDistance())
+                .append("distanceOnFoot", t.getDistanceOnFoot())
+                .append("distanceOnCar", t.getDistanceOnCar())
                 .append("type", t.getTypeTransport());
 
         if (t.getId() != null) {
@@ -33,7 +34,7 @@ public class TransportConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Transport toTransport(DBObject doc) {
-        Transport t = new Transport((Double) doc.get("latitude"), (Double) doc.get("longitude"), (Double) doc.get("distance"));
+        Transport t = new Transport((Double) doc.get("latitude"), (Double) doc.get("longitude"), (Double) doc.get("distanceOnFoot"), (Double) doc.get("distanceOnCar"));
         return t;
     }
 

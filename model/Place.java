@@ -18,15 +18,18 @@ public abstract class Place {
  
     private Double longitude;
     
-    private Double distance;
+    private Double distanceOnFoot;
+    
+    private Double distanceOnCar;
 
     public Place() {
     }
 
-    public Place(Double latitude, Double longitude, Double distance) {
+    public Place(Double latitude, Double longitude, Double distancef, Double distancec) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.distance = distance;
+        this.distanceOnFoot = distancef;
+        this.distanceOnCar = distancec;
     }
     public Double getLatitude() {
         return latitude;
@@ -44,14 +47,6 @@ public abstract class Place {
         this.longitude = longitude;
     }
 
-    public Double getDistance() {
-        return distance;
-    }
-
-    public void setDistance(Double distance) {
-        this.distance = distance;
-    }
-
     public String getId() {
         return id;
     }
@@ -59,9 +54,25 @@ public abstract class Place {
     public void setId(String id) {
         this.id = id;
     }
+
+    public Double getDistanceOnFoot() {
+        return distanceOnFoot;
+    }
+
+    public void setDistanceOnFoot(Double distanceOnFoot) {
+        this.distanceOnFoot = distanceOnFoot;
+    }
+
+    public Double getDistanceOnCar() {
+        return distanceOnCar;
+    }
+
+    public void setDistanceOnCar(Double distanceOnCar) {
+        this.distanceOnCar = distanceOnCar;
+    }
     
     public String toString() {
-        return distance + " " + latitude + " " + longitude;
+        return distanceOnFoot + " " + distanceOnCar + " " + latitude + " " + longitude;
     }
     
 }

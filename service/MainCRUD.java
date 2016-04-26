@@ -24,9 +24,9 @@ public class MainCRUD {
        MongoClient mongoClient = new MongoClient();
        MongoDBSquareDao mg = new MongoDBSquareDao(mongoClient);
         
-       Atm a = new Atm(12.3, 13.3, 14.3);
-       Supermarket sm = new Supermarket(13.3, 14.3, 15.3);
-       Transport t = new Transport(20.3, 19.3, 17.3);
+       Atm a = new Atm(12.3, 13.3, 14.3, 15.2);
+       Supermarket sm = new Supermarket(13.3, 14.3, 15.3, 12.2);
+       Transport t = new Transport(20.3, 19.3, 17.3, 11.1);
        Square s1 = new Square(12.0, 13.0, a, sm, t);
        
        System.out.println(s1.toString());

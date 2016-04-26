@@ -11,8 +11,8 @@ package model;
  */
 public class Atm extends Place {
 
-    public Atm(Double latitude, Double longitude, Double distance) {
-        super(latitude, longitude, distance);
+    public Atm(Double latitude, Double longitude, Double distancef, Double distancec) {
+        super(latitude, longitude, distancef,distancec);
     }
 
     public Atm() {

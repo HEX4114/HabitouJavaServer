@@ -13,8 +13,8 @@ public class Supermarket extends Place {
     
     private String name;
 
-    public Supermarket(Double latitude, Double longitude, Double distance) {
-        super(latitude, longitude, distance);
+    public Supermarket(Double latitude, Double longitude, Double distancef, Double distancec) {
+        super(latitude, longitude, distancef, distancec);
     }
 
     public Supermarket() {
