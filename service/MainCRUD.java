@@ -1,11 +1,11 @@
-import com.mongodb.Block;
 import com.mongodb.MongoClient;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import dao.MongoDBSquareDao;
 import java.util.List;
+import model.Atm;
 import model.Square;
-import org.bson.Document;
+import model.Supermarket;
+import model.Transport;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,9 +21,18 @@ public class MainCRUD {
     static MongoDatabase db;
 
     public static void main(String[] args) {
-        MongoClient mongoClient = new MongoClient();
-
-        MongoDBSquareDao mg = new MongoDBSquareDao(mongoClient);
+       MongoClient mongoClient = new MongoClient();
+       MongoDBSquareDao mg = new MongoDBSquareDao(mongoClient);
+        
+       Atm a = new Atm(12.3, 13.3, 14.3);
+       Supermarket sm = new Supermarket(13.3, 14.3, 15.3);
+       Transport t = new Transport(20.3, 19.3, 17.3);
+       Square s1 = new Square(12.0, 13.0, a, sm, t);
+       
+       System.out.println(s1.toString());
+       
+       Square s2 = mg.createSquare(s1);
+             
         List<Square> squares = mg.readAllSquares();
         
         for(Square sq : squares) {

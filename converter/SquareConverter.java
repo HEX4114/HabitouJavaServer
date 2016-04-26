@@ -7,10 +7,7 @@ package converter;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
-import model.Atm;
 import model.Square;
-import model.Supermarket;
-import model.Transport;
 import org.bson.types.ObjectId;
 
 /**
@@ -25,9 +22,9 @@ public class SquareConverter {
  
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
                 .append("latitude", s.getLatitude()).append("longitude", s.getLongitude())
-                .append("nearestAtm", s.getNearestAtm())
-                .append("nearestSupermarket", s.getNearestSupermarket())
-                .append("nearestTransport", s.getNearestTransport());
+                .append("nearestAtm", AtmConverter.toDBObject(s.getNearestAtm()))
+                .append("nearestSupermarket", SupermarketConverter.toDBObject(s.getNearestSupermarket()))
+                .append("nearestTransport", TransportConverter.toDBObject(s.getNearestTransport()));
                 
         if (s.getId() != null)
             builder = builder.append("_id", new ObjectId(s.getId()));

@@ -32,7 +32,6 @@ public class SupermarketConverter {
     // take special note of converting ObjectId to String
     public static Supermarket toSupermarket(DBObject doc) {
         Supermarket s = new Supermarket((Double) doc.get("latitude"),(Double) doc.get("longitude"),(Double) doc.get("distance"));
-
         return s;
     }
     
