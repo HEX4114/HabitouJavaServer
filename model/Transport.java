@@ -16,6 +16,11 @@ public class Transport extends Place {
     
     private TypeTransport typeTransport;
 
+    public Transport(TypeTransport typeTransport, Double latitude, Double longitude, Double distance) {
+        super(latitude, longitude, distance);
+        this.typeTransport = typeTransport;
+    }
+    
     public TypeTransport getTypeTransport() {
         return typeTransport;
     }

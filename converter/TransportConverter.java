@@ -32,12 +32,7 @@ public class TransportConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Transport toSupermarket(DBObject doc) {
-        Transport t = new Transport();
-        t.setLatitude((Integer) doc.get("latitude"));
-        t.setLongitude((Integer) doc.get("longitude"));
-        t.setDistance((Integer) doc.get("distance"));
-        t.setTypeTransport((TypeTransport) doc.get("type"));
-        
+        Transport t = new Transport((TypeTransport) doc.get("type"), (Double) doc.get("latitude"), (Double) doc.get("longitude"),(Double) doc.get("distance"));        
         ObjectId id = (ObjectId) doc.get("_id");
         t.setId(id.toString());
         return t;

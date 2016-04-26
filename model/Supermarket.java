@@ -13,6 +13,11 @@ public class Supermarket extends Place {
     
     private String name;
 
+    public Supermarket(String name, Double latitude, Double longitude, Double distance) {
+        super(latitude, longitude, distance);
+        this.name = name;
+    }
+    
     public String getName() {
         return name;
     }
