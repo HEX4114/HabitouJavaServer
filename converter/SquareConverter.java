@@ -37,17 +37,16 @@ public class SquareConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Square toSquare(DBObject doc) {
-        Square p = new Square();
-        p.setLatitude((Integer) doc.get("latitude"));
-        p.setLongitude((Integer) doc.get("longitude"));
-        p.setNearestAtm((Atm) doc.get("nearestAtm"));
-        p.setNearestTransport((Transport) doc.get("nearestAtm"));
-        p.setNearestSupermarket((Supermarket) doc.get("nearestAtm"));
+        Square s = new Square();
+        s.setLatitude((Integer) doc.get("latitude"));
+        s.setLongitude((Integer) doc.get("longitude"));
+        s.setNearestAtm((Atm) doc.get("nearestAtm"));
+        s.setNearestTransport((Transport) doc.get("nearestAtm"));
+        s.setNearestSupermarket((Supermarket) doc.get("nearestAtm"));
         ObjectId id = (ObjectId) doc.get("_id");
-        p.setId(id.toString());
-        return p;
+        s.setId(id.toString());
+        return s;
  
     }
-    
     
 }
