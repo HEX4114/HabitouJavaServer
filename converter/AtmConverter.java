@@ -38,7 +38,7 @@ public class AtmConverter {
         Atm a = new Atm();
         a.setLatitude((Integer) doc.get("latitude"));
         a.setLongitude((Integer) doc.get("longitude"));
-        
+        a.setDistance((Integer) doc.get("distance"));
         ObjectId id = (ObjectId) doc.get("_id");
         a.setId(id.toString());
         return a;

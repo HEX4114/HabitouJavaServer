@@ -5,10 +5,42 @@
  */
 package converter;
 
+import com.mongodb.BasicDBObjectBuilder;
+import com.mongodb.DBObject;
+import model.Transport;
+import model.TypeTransport;
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author François
  */
 public class TransportConverter {
+    
+    public static DBObject toDBObject(Transport t) {
+ 
+        BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
+                .append("latitude", t.getLatitude()).append("longitude", t.getLongitude())
+                .append("distance", t.getDistance())
+                .append("type", t.getTypeTransport());
+                
+        if (t.getId() != null)
+            builder = builder.append("_id", new ObjectId(t.getId()));
+        return builder.get();
+    }
+ 
+    // convert DBObject Object to Square
+    // take special note of converting ObjectId to String
+    public static Transport toSupermarket(DBObject doc) {
+        Transport t = new Transport();
+        t.setLatitude((Integer) doc.get("latitude"));
+        t.setLongitude((Integer) doc.get("longitude"));
+        t.setDistance((Integer) doc.get("distance"));
+        t.setTypeTransport((TypeTransport) doc.get("type"));
+        
+        ObjectId id = (ObjectId) doc.get("_id");
+        t.setId(id.toString());
+        return t;
+    }
     
 }

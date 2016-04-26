@@ -34,6 +34,7 @@ public class SupermarketConverter {
         Supermarket s = new Supermarket();
         s.setLatitude((Integer) doc.get("latitude"));
         s.setLongitude((Integer) doc.get("longitude"));
+        s.setDistance((Integer) doc.get("distance"));
         s.setName((String) doc.get("name"));
         
         ObjectId id = (ObjectId) doc.get("_id");
