@@ -28,7 +28,6 @@ public abstract class Place {
         this.longitude = longitude;
         this.distance = distance;
     }
-
     public Double getLatitude() {
         return latitude;
     }

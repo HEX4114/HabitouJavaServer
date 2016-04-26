@@ -17,11 +17,9 @@ public class Atm extends Place {
 
     public Atm() {
     }
-    
+
     @Override
     public String toString() {
         return "Atm: " + super.toString();
-                
     }
-    
 }

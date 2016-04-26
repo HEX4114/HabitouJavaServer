@@ -31,14 +31,8 @@ public class SupermarketConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Supermarket toSupermarket(DBObject doc) {
-        Supermarket s = new Supermarket();
-        s.setLatitude((Double) doc.get("latitude"));
-        s.setLongitude((Double) doc.get("longitude"));
-        s.setDistance((Double) doc.get("distance"));
-        s.setName((String) doc.get("name"));
-        
-        //ObjectId id = (ObjectId) doc.get("_id");
-        //s.setId(id.toString());
+        Supermarket s = new Supermarket((Double) doc.get("latitude"),(Double) doc.get("longitude"),(Double) doc.get("distance"));
+
         return s;
     }
     

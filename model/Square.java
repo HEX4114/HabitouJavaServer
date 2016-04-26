@@ -23,6 +23,9 @@ public class Square {
     
     private Transport nearestTransport;
 
+    public Square() {
+    }
+
     public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Transport nearestTransport) {
         this.latitude = latitude;
         this.longitude = longitude;
