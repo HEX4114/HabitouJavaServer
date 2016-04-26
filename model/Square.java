@@ -9,20 +9,26 @@ package model;
  *
  * @author François
  */
-public class Case {
+public class Square {
     
-    private String id;
+    private Integer id;
  
     private Integer latitude;
  
     private Integer longitude;
     
+    private Atm nearestAtm;
+    
+    private Supermarket nearestSupermarket;
+    
+    private Transport nearestTransport;
+    
  
-    public String getId() {
+    public Integer getId() {
         return id;
     }
  
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
