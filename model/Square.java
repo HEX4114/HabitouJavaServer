@@ -13,16 +13,23 @@ public class Square {
     
     private String id;
  
-    private Integer latitude;
+    private Double latitude;
  
-    private Integer longitude;
+    private Double longitude;
     
     private Atm nearestAtm;
     
     private Supermarket nearestSupermarket;
     
     private Transport nearestTransport;
-    
+
+    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Transport nearestTransport) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.nearestAtm = nearestAtm;
+        this.nearestSupermarket = nearestSupermarket;
+        this.nearestTransport = nearestTransport;
+    }
  
     public String getId() {
         return id;
@@ -32,19 +39,19 @@ public class Square {
         this.id = id;
     }
 
-    public Integer getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
@@ -70,6 +77,11 @@ public class Square {
 
     public void setNearestTransport(Transport nearestTransport) {
         this.nearestTransport = nearestTransport;
+    }
+    
+    @Override
+    public String toString() {
+        return latitude + " " + longitude + " " + nearestAtm.toString();
     }
     
 }

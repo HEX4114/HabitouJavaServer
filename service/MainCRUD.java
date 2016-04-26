@@ -2,6 +2,9 @@ import com.mongodb.Block;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
+import dao.MongoDBSquareDao;
+import java.util.List;
+import model.Square;
 import org.bson.Document;
 
 /*
@@ -19,14 +22,16 @@ public class MainCRUD {
 
     public static void main(String[] args) {
         MongoClient mongoClient = new MongoClient();
-        db = mongoClient.getDatabase("habitoudb");
 
-        findAll();
-        findDistance("atm", 6);
-        //insertPoint();
-
+        MongoDBSquareDao mg = new MongoDBSquareDao(mongoClient);
+        List<Square> squares = mg.readAllSquares();
+        
+        for(Square sq : squares) {
+            System.out.println(sq.toString());
+        }
     }
-
+    
+/*
     private static void findAll() {
         System.out.println("== Find all");
         FindIterable<Document> iterable = db.getCollection("points").find();
@@ -74,5 +79,5 @@ public class MainCRUD {
                         .append("long", 17.659409)));
 
     }
-
+*/
 }

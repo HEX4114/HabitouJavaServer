@@ -38,11 +38,11 @@ public class SquareConverter {
     // take special note of converting ObjectId to String
     public static Square toSquare(DBObject doc) {
         Square s = new Square();
-        s.setLatitude((Integer) doc.get("latitude"));
-        s.setLongitude((Integer) doc.get("longitude"));
-        s.setNearestAtm((Atm) doc.get("nearestAtm"));
-        s.setNearestTransport((Transport) doc.get("nearestAtm"));
-        s.setNearestSupermarket((Supermarket) doc.get("nearestAtm"));
+        s.setLatitude((Double) doc.get("latitude"));
+        s.setLongitude((Double) doc.get("longitude"));
+        s.setNearestAtm(AtmConverter.toAtm((DBObject) doc.get("nearestAtm")));
+        s.setNearestTransport(TransportConverter.toTransport((DBObject) doc.get("nearestTransport")));
+        s.setNearestSupermarket(SupermarketConverter.toSupermarket((DBObject) doc.get("nearestSupermarket")));
         ObjectId id = (ObjectId) doc.get("_id");
         s.setId(id.toString());
         return s;

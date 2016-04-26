@@ -8,9 +8,6 @@ package converter;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import model.Atm;
-import model.Square;
-import model.Supermarket;
-import model.Transport;
 import org.bson.types.ObjectId;
 
 /**
@@ -36,11 +33,11 @@ public class AtmConverter {
     // take special note of converting ObjectId to String
     public static Atm toAtm(DBObject doc) {
         Atm a = new Atm();
-        a.setLatitude((Integer) doc.get("latitude"));
-        a.setLongitude((Integer) doc.get("longitude"));
-        a.setDistance((Integer) doc.get("distance"));
-        ObjectId id = (ObjectId) doc.get("_id");
-        a.setId(id.toString());
+        a.setLatitude((Double) doc.get("latitude"));
+        a.setLongitude((Double) doc.get("longitude"));
+        a.setDistance((Double) doc.get("distance"));
+//        ObjectId id = (ObjectId) doc.get("_id");
+//        a.setId(id.toString());
         return a;
     }
     

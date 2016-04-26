@@ -11,5 +11,17 @@ package model;
  */
 public class Atm extends Place {
 
+    public Atm(Double latitude, Double longitude, Double distance) {
+        super(latitude, longitude, distance);
+    }
+
+    public Atm() {
+    }
+    
+    @Override
+    public String toString() {
+        return "Atm: " + super.toString();
+                
+    }
     
 }

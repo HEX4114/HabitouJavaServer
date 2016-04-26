@@ -14,33 +14,42 @@ public abstract class Place {
     
     private String id;
     
-    private Integer latitude;
+    private Double latitude;
  
-    private Integer longitude;
+    private Double longitude;
     
-    private Integer distance;
+    private Double distance;
 
-    public Integer getLatitude() {
+    public Place() {
+    }
+
+    public Place(Double latitude, Double longitude, Double distance) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.distance = distance;
+    }
+
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Integer latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Integer getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Integer longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public Integer getDistance() {
+    public Double getDistance() {
         return distance;
     }
 
-    public void setDistance(Integer distance) {
+    public void setDistance(Double distance) {
         this.distance = distance;
     }
 
@@ -52,5 +61,8 @@ public abstract class Place {
         this.id = id;
     }
     
+    public String toString() {
+        return distance + " " + latitude + " " + longitude;
+    }
     
 }

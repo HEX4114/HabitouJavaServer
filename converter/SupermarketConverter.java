@@ -32,13 +32,13 @@ public class SupermarketConverter {
     // take special note of converting ObjectId to String
     public static Supermarket toSupermarket(DBObject doc) {
         Supermarket s = new Supermarket();
-        s.setLatitude((Integer) doc.get("latitude"));
-        s.setLongitude((Integer) doc.get("longitude"));
-        s.setDistance((Integer) doc.get("distance"));
+        s.setLatitude((Double) doc.get("latitude"));
+        s.setLongitude((Double) doc.get("longitude"));
+        s.setDistance((Double) doc.get("distance"));
         s.setName((String) doc.get("name"));
         
-        ObjectId id = (ObjectId) doc.get("_id");
-        s.setId(id.toString());
+        //ObjectId id = (ObjectId) doc.get("_id");
+        //s.setId(id.toString());
         return s;
     }
     

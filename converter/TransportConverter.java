@@ -31,15 +31,15 @@ public class TransportConverter {
  
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
-    public static Transport toSupermarket(DBObject doc) {
+    public static Transport toTransport(DBObject doc) {
         Transport t = new Transport();
-        t.setLatitude((Integer) doc.get("latitude"));
-        t.setLongitude((Integer) doc.get("longitude"));
-        t.setDistance((Integer) doc.get("distance"));
-        t.setTypeTransport((TypeTransport) doc.get("type"));
+        t.setLatitude((Double) doc.get("latitude"));
+        t.setLongitude((Double) doc.get("longitude"));
+        t.setDistance((Double) doc.get("distance"));
+        //t.setTypeTransport((TypeTransport) doc.get("type"));
         
-        ObjectId id = (ObjectId) doc.get("_id");
-        t.setId(id.toString());
+        //ObjectId id = (ObjectId) doc.get("_id");
+        //t.setId(id.toString());
         return t;
     }
     
