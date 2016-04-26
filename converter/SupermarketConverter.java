@@ -16,14 +16,15 @@ import org.bson.types.ObjectId;
  */
 public class SupermarketConverter {
     
-    public static DBObject toDBObject(Supermarket a) {
+    public static DBObject toDBObject(Supermarket s) {
  
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
-                .append("latitude", a.getLatitude()).append("longitude", a.getLongitude())
-                .append("distance", a.getDistance());
+                .append("latitude", s.getLatitude()).append("longitude", s.getLongitude())
+                .append("distance", s.getDistance())
+                .append("name", s.getName());
                 
-        if (a.getId() != null)
-            builder = builder.append("_id", new ObjectId(a.getId()));
+        if (s.getId() != null)
+            builder = builder.append("_id", new ObjectId(s.getId()));
         return builder.get();
     }
  
