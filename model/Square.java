@@ -84,7 +84,7 @@ public class Square {
     
     @Override
     public String toString() {
-        return latitude + " " + longitude + " " + nearestAtm.toString();
+        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString() + " " + nearestTransport.toString();
     }
     
 }

@@ -28,6 +28,11 @@ public class Supermarket extends Place {
         this.name = name;
     }
     
+    @Override
+    public String toString() {
+        return "Supermarket: " + super.toString();
+    }
+    
     
     
 }

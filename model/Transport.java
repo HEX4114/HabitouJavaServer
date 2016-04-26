@@ -31,6 +31,11 @@ public class Transport extends Place {
         this.typeTransport = typeTransport;
     }
     
+    @Override
+    public String toString() {
+        return "Transport: " + super.toString();
+    }
+    
     
     
 }
