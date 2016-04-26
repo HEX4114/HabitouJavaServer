@@ -43,7 +43,7 @@ public class MongoDBSquareDao {
     }
 
     public List<Square> readAllSquares() {
-        List<Square> data = new ArrayList<>();
+        List<Square> data = new ArrayList<Square>();
         DBCursor cursor = col.find();
         while (cursor.hasNext()) {
             DBObject doc = cursor.next();
