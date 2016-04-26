@@ -11,7 +11,7 @@ package model;
  */
 public class Square {
     
-    private Integer id;
+    private String id;
  
     private Integer latitude;
  
@@ -24,11 +24,11 @@ public class Square {
     private Transport nearestTransport;
     
  
-    public Integer getId() {
+    public String getId() {
         return id;
     }
  
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -47,8 +47,29 @@ public class Square {
     public void setLongitude(Integer longitude) {
         this.longitude = longitude;
     }
-    
-    
-    
+
+    public Atm getNearestAtm() {
+        return nearestAtm;
+    }
+
+    public void setNearestAtm(Atm nearestAtm) {
+        this.nearestAtm = nearestAtm;
+    }
+
+    public Supermarket getNearestSupermarket() {
+        return nearestSupermarket;
+    }
+
+    public void setNearestSupermarket(Supermarket nearestSupermarket) {
+        this.nearestSupermarket = nearestSupermarket;
+    }
+
+    public Transport getNearestTransport() {
+        return nearestTransport;
+    }
+
+    public void setNearestTransport(Transport nearestTransport) {
+        this.nearestTransport = nearestTransport;
+    }
     
 }

@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package converter;
 
 /**
  *
  * @author François
  */
-public enum TypeTransport {
-    TRAIN,
-    TRAM,
-    BUS;
+public class SupermarketConverter {
+    
 }
