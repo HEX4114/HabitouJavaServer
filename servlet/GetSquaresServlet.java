@@ -33,11 +33,6 @@ public class GetSquaresServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
-        String id = request.getParameter("id");
-        if (id == null || "".equals(id)) {
-            throw new ServletException("id missing for edit operation");
-        }
-        System.out.println("Person edit requested with id=" + id);
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
@@ -45,7 +40,7 @@ public class GetSquaresServlet extends HttpServlet {
         request.setAttribute("squares", squares);
  
         RequestDispatcher rd = getServletContext().getRequestDispatcher(
-                "/persons.jsp");
+                "/index.jsp");
         rd.forward(request, response);
     }
 }
