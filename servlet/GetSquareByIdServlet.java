@@ -44,6 +44,7 @@ public class GetSquareByIdServlet extends HttpServlet {
 
         PrintWriter out = response.getWriter();
         
+        out.write("<document>");
         out.write("<square>");
             out.write("<id>" + square.getId() + "</id>");
             out.write("<lati>" + square.getLatitude() + "</lati>");
@@ -77,5 +78,6 @@ public class GetSquareByIdServlet extends HttpServlet {
                 out.write("</drive>");
             out.write("</supermarket>");
         out.write("</square>");
+        out.write("</document>");
     }
 }
