@@ -112,7 +112,9 @@ public class Criterions {
         }
         else
         {
-            List<Double> listDistance = new ArrayList<>(); listDistance.add(distanceOnFoot); listDistance.add(distanceOnCar);
+            List<Double> listDistance = new ArrayList<>(); listDistance.add(distanceOnFoot);
+            if(onCar)
+                listDistance.add(distanceOnCar);
             Double minDistance = getMin(listDistance);
             
             result = 1 - ((minDistance - maxDistance)/maxDistance);

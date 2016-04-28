@@ -134,9 +134,9 @@ public class SquareInformation {
     
      public static void main(String[] args) {
        List<Square> squares = new ArrayList<>();
-       squares.add(new Square(1.0, 2.0, new Atm(1.0, 3.0, 5.0, 3.0), new Supermarket(1.0, 3.0, 5.0, 3.0), new Transport(1.0, 3.0, 15.0, 12.0)));
+       squares.add(new Square(1.0, 2.0, new Atm(1.0, 3.0, 5.0, 3.0), new Supermarket(1.0, 3.0, 5.0, 3.0), new Transport(1.0, 3.0, 20.0, 12.0)));
        
-       Criterions  c = new Criterions(true, null, null, "10");
+       Criterions  c = new Criterions(false, null, null, "10");
        
        List<SquareInformation> squaresInfo = SquareInformation.convertSquares(squares, c);
        
