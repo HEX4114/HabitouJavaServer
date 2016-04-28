@@ -19,19 +19,17 @@ public class Criterions {
     String atm;
     
     String supermarket;
-    
-    String transport;
+   
     
     public Criterions(){
         
     }
     
-    public Criterions(Boolean onCar, String atm, String supermarket, String transport) {
+    public Criterions(Boolean onCar, String atm, String supermarket) {
         
         this.onCar = onCar;
         this.atm = atm;
         this.supermarket = supermarket;
-        this.transport = transport;
         
     }
 
@@ -59,13 +57,6 @@ public class Criterions {
         this.supermarket = supermarket;
     }
 
-    public String getTransport() {
-        return transport;
-    }
-
-    public void setTransport(String transport) {
-        this.transport = transport;
-    }
     
     private Double getMin(List<Double> listDouble)
     {
@@ -91,20 +82,14 @@ public class Criterions {
         if(typePlace.equals("Atm"))
         {
             maxDistance = Double.parseDouble(atm);
-            distanceOnFoot = s.getNearestAtm().getDistanceOnFoot();
-            distanceOnCar = s.getNearestAtm().getDistanceOnCar();
+            distanceOnFoot = s.getNearestAtm().getWalk().getTime();
+            distanceOnCar = s.getNearestAtm().getDrive().getTime();
         }
         else if(typePlace.equals("Supermarket"))
         {
             maxDistance = Double.parseDouble(supermarket);
-            distanceOnFoot = s.getNearestSupermarket().getDistanceOnFoot();
-            distanceOnCar = s.getNearestSupermarket().getDistanceOnCar();
-        }
-        else if(typePlace.equals("Transport"))
-        {
-            maxDistance = Double.parseDouble(transport);
-            distanceOnFoot = s.getNearestTransport().getDistanceOnFoot();
-            distanceOnCar = s.getNearestTransport().getDistanceOnCar();
+            distanceOnFoot = s.getNearestSupermarket().getWalk().getTime();
+            distanceOnCar = s.getNearestSupermarket().getDrive().getTime();
         }
         
         

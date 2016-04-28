@@ -14,21 +14,12 @@ package model;
 
 public class Transport extends Place {
     
-    private TypeTransport typeTransport;
 
-    public Transport(Double latitude, Double longitude, Double distancef, Double distancec) {
-        super(latitude, longitude, distancef, distancec);
+    public Transport(Walk walk, Drive drive) {
+        super(walk, drive);
     }
 
     public Transport() {
-    }
-
-    public TypeTransport getTypeTransport() {
-        return typeTransport;
-    }
-
-    public void setTypeTransport(TypeTransport typeTransport) {
-        this.typeTransport = typeTransport;
     }
     
     @Override

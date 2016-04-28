@@ -9,17 +9,9 @@ package model;
  *
  * @author François
  */
-public class Atm extends Place {
-
-    public Atm(Walk walk, Drive drive) {
-        super(walk, drive);
-    }
-
-    public Atm() {
-    }
-
-    @Override
-    public String toString() {
-        return "Atm: " + super.toString();
+public class Walk extends WayToGo {
+    
+    public Walk(String name,Double lat, Double lon, Double time){
+        super(name, lat, lon, time);
     }
 }

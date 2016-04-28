@@ -20,20 +20,16 @@ public class AtmConverter {
     public static DBObject toDBObject(Atm a) {
 
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
-                .append("latitude", a.getLatitude()).append("longitude", a.getLongitude())
-                .append("distanceOnFoot", a.getDistanceOnFoot())
-                .append("distanceOnCar", a.getDistanceOnCar());
+                .append("walk", WalkConverter.toDBObject(a.getWalk()))
+                .append("drive", DriveConverter.toDBObject(a.getDrive()));
 
-//        if (a.getId() != null) {
-//            builder = builder.append("_id", new ObjectId(a.getId()));
-//        }
         return builder.get();
     }
 
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Atm toAtm(DBObject doc) {
-        Atm a = new Atm((Double) doc.get("latitude"), (Double) doc.get("longitude"), (Double) doc.get("distanceOnFoot"), (Double) doc.get("distanceOnCar"));
+        Atm a = new Atm(WalkConverter.toWalk((DBObject) doc.get("walk")), DriveConverter.toDrive((DBObject) doc.get("drive")));
         return a;
     }
 

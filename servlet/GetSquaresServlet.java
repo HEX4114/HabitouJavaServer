@@ -66,7 +66,6 @@ public class GetSquaresServlet extends HttpServlet {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
-        String transport = request.getParameter("transport");
         
         Boolean car;
         
@@ -80,7 +79,7 @@ public class GetSquaresServlet extends HttpServlet {
         }
         
         
-        Criterions result = new Criterions(car, atm, supermarket, transport);
+        Criterions result = new Criterions(car, atm, supermarket);
         
         return result;
     }

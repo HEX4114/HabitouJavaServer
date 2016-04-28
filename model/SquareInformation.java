@@ -46,7 +46,7 @@ public class SquareInformation {
     }
 
     public void setColor(Double color) {
-        this.colorScore = colorScore;
+        this.colorScore = color;
     }
 
     public Double getLatitude() {
@@ -76,11 +76,6 @@ public class SquareInformation {
         {
             scores.add(c.getScore(s, "Supermarket"));
         }
-        if(!c.getTransport().equals("null"))
-        {
-            scores.add(c.getScore(s, "Transport"));
-        }
-        
         
         return scores;
     }
@@ -133,14 +128,7 @@ public class SquareInformation {
     
     
      public static void main(String[] args) {
-       List<Square> squares = new ArrayList<>();
-       squares.add(new Square(1.0, 2.0, new Atm(1.0, 3.0, 5.0, 3.0), new Supermarket(1.0, 3.0, 5.0, 3.0), new Transport(1.0, 3.0, 20.0, 12.0)));
-       
-       Criterions  c = new Criterions(false, null, null, "10");
-       
-       List<SquareInformation> squaresInfo = SquareInformation.convertSquares(squares, c);
-       
-       System.out.println(squaresInfo);
+     
        
        
        

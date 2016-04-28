@@ -10,22 +10,12 @@ package model;
  * @author François
  */
 public class Supermarket extends Place {
-    
-    private String name;
 
-    public Supermarket(Double latitude, Double longitude, Double distancef, Double distancec) {
-        super(latitude, longitude, distancef, distancec);
+    public Supermarket(Walk walk, Drive drive) {
+        super(walk, drive);
     }
 
     public Supermarket() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
     
     @Override

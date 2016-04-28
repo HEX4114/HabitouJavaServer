@@ -9,8 +9,10 @@ package model;
  *
  * @author François
  */
-public enum TypeTransport {
-    TRAIN,
-    TRAM,
-    BUS;
+public class Drive extends WayToGo {
+    
+    public Drive(String name,Double lat, Double lon, Double time){
+        super(name,lat, lon, time);
+    }
+    
 }

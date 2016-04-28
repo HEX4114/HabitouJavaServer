@@ -12,67 +12,38 @@ package model;
 
 public abstract class Place {
     
-    private String id;
+    private Walk walk;
     
-    private Double latitude;
- 
-    private Double longitude;
-    
-    private Double distanceOnFoot;
-    
-    private Double distanceOnCar;
+    private Drive drive;
 
     public Place() {
     }
 
-    public Place(Double latitude, Double longitude, Double distancef, Double distancec) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.distanceOnFoot = distancef;
-        this.distanceOnCar = distancec;
-    }
-    public Double getLatitude() {
-        return latitude;
+    public Place(Walk walk, Drive drive) {
+        this.walk = walk;
+        this.drive = drive;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
+    public Walk getWalk() {
+        return walk;
     }
 
-    public Double getLongitude() {
-        return longitude;
+    public void setWalk(Walk walk) {
+        this.walk = walk;
     }
 
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public Drive getDrive() {
+        return drive;
     }
 
-    public String getId() {
-        return id;
+    public void setDrive(Drive drive) {
+        this.drive = drive;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public Double getDistanceOnFoot() {
-        return distanceOnFoot;
-    }
-
-    public void setDistanceOnFoot(Double distanceOnFoot) {
-        this.distanceOnFoot = distanceOnFoot;
-    }
-
-    public Double getDistanceOnCar() {
-        return distanceOnCar;
-    }
-
-    public void setDistanceOnCar(Double distanceOnCar) {
-        this.distanceOnCar = distanceOnCar;
+    @Override
+    public String toString() {
+        return "Place{" + "walk=" + walk + ", drive=" + drive + '}';
     }
     
-    public String toString() {
-        return distanceOnFoot + " " + distanceOnCar + " " + latitude + " " + longitude;
-    }
     
 }
