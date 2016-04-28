@@ -47,16 +47,14 @@ public class GetSquaresServlet extends HttpServlet {
         response.setHeader("Cache-Control", "no-cache");
 
         PrintWriter out = response.getWriter();
-        int i=0;
         
         for(SquareInformation s : squares) {
-            out.write("<square" + i + ">");
+            out.write("<square>");
             out.write("<id>" + s.getId() + "</id>");
             out.write("<lati>" + s.getLatitude() + "</lati>");
             out.write("<long>" + s.getLongitude() + "</long>");
             out.write("<score>" + s.getColorScore() + "</score>");
-            out.write("</square" + i + ">");
-            i++;
+            out.write("</square>");
         }
         
         
