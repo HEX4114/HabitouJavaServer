@@ -68,15 +68,15 @@ public class SquareInformation {
     private List<Double> makeScoreList(Square s, Criterions c)
     {
         List<Double> scores = new ArrayList<>();
-        if(c.getAtm() != null)
+        if(!c.getAtm().equals("null"))
         {
             scores.add(c.getScore(s, "Atm"));
         }
-        if(c.getSupermarket() != null)
+        if(!c.getSupermarket().equals("null"))
         {
             scores.add(c.getScore(s, "Supermarket"));
         }
-        if(c.getTransport() != null)
+        if(!c.getTransport().equals("null"))
         {
             scores.add(c.getScore(s, "Transport"));
         }

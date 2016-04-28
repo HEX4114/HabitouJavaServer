@@ -22,6 +22,10 @@ public class Criterions {
     
     String transport;
     
+    public Criterions(){
+        
+    }
+    
     public Criterions(Boolean onCar, String atm, String supermarket, String transport) {
         
         this.onCar = onCar;

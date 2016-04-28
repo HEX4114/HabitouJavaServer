@@ -22,8 +22,10 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.mongodb.MongoClient;
-import model.Square;
 import dao.MongoDBSquareDao;
+import java.io.PrintWriter;
+import model.Criterions;
+import model.SquareInformation;
  
 @WebServlet("/getSquares")
 public class GetSquaresServlet extends HttpServlet {
@@ -36,12 +38,50 @@ public class GetSquaresServlet extends HttpServlet {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
-        List<Square> squares = squareDAO.readAllSquares();
-        request.setAttribute("squares", squares);
         
- 
-        RequestDispatcher rd = getServletContext().getRequestDispatcher(
-                "/index.jsp");
-        rd.forward(request, response);
+        Criterions criterions = getCriterions(request);
+        
+        List<SquareInformation> squares = SquareInformation.convertSquares(squareDAO.readAllSquares(), criterions);
+        
+        response.setContentType("text/xml");
+        response.setHeader("Cache-Control", "no-cache");
+
+        PrintWriter out = response.getWriter();
+        int i=0;
+        
+        for(SquareInformation s : squares) {
+            out.write("<square" + i + ">");
+            out.write("<id>" + s.getId() + "</id>");
+            out.write("<lati>" + s.getLatitude() + "</lati>");
+            out.write("<long>" + s.getLongitude() + "</long>");
+            out.write("<score>" + s.getColorScore() + "</score>");
+            out.write("</square" + i + ">");
+            i++;
+        }
+        
+        
+    }
+    
+    private Criterions getCriterions(HttpServletRequest request){
+        String onCar = request.getParameter("car");
+        String atm = request.getParameter("atm");
+        String supermarket = request.getParameter("supermarket");
+        String transport = request.getParameter("transport");
+        
+        Boolean car;
+        
+        if(onCar.equals("y"))
+        {
+            car = true;
+        }
+        else
+        {
+            car = false;
+        }
+        
+        
+        Criterions result = new Criterions(car, atm, supermarket, transport);
+        
+        return result;
     }
 }
