@@ -59,9 +59,9 @@ public class MongoDBSquareDao {
         this.col.remove(query);
     }
 
-    public Square readSquare(Square p) {
+    public Square readSquare(String id) {
         DBObject query = BasicDBObjectBuilder.start()
-                .append("_id", new ObjectId(p.getId())).get();
+                .append("_id", new ObjectId(id)).get();
         DBObject data = this.col.findOne(query);
         return SquareConverter.toSquare(data);
     }
