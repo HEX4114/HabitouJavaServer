@@ -21,10 +21,10 @@ public class SquareConverter {
     public static DBObject toDBObject(Square s) {
  
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
-                .append("latitude", s.getLatitude()).append("longitude", s.getLongitude())
-                .append("nearestAtm", AtmConverter.toDBObject(s.getNearestAtm()))
-                .append("nearestSupermarket", SupermarketConverter.toDBObject(s.getNearestSupermarket()))
-                .append("nearestTransport", TransportConverter.toDBObject(s.getNearestTransport()));
+                .append("lat", s.getLatitude()).append("long", s.getLongitude())
+                .append("atm", AtmConverter.toDBObject(s.getNearestAtm()))
+                .append("supermarket", SupermarketConverter.toDBObject(s.getNearestSupermarket()))
+                .append("transport", TransportConverter.toDBObject(s.getNearestTransport()));
                 
         if (s.getId() != null)
             builder = builder.append("_id", new ObjectId(s.getId()));
@@ -35,11 +35,10 @@ public class SquareConverter {
     // take special note of converting ObjectId to String
     public static Square toSquare(DBObject doc) {
         Square s = new Square();
-        s.setLatitude((Double) doc.get("latitude"));
-        s.setLongitude((Double) doc.get("longitude"));
-        s.setNearestAtm(AtmConverter.toAtm((DBObject) doc.get("nearestAtm")));
-        s.setNearestTransport(TransportConverter.toTransport((DBObject) doc.get("nearestTransport")));
-        s.setNearestSupermarket(SupermarketConverter.toSupermarket((DBObject) doc.get("nearestSupermarket")));
+        s.setLatitude((Double) doc.get("lat"));
+        s.setLongitude((Double) doc.get("long"));
+        s.setNearestAtm(AtmConverter.toAtm((DBObject) doc.get("atm")));
+        s.setNearestSupermarket(SupermarketConverter.toSupermarket((DBObject) doc.get("supermarket")));
         ObjectId id = (ObjectId) doc.get("_id");
         s.setId(id.toString());
         return s;
