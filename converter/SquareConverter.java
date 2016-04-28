@@ -23,8 +23,7 @@ public class SquareConverter {
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
                 .append("lat", s.getLatitude()).append("long", s.getLongitude())
                 .append("atm", AtmConverter.toDBObject(s.getNearestAtm()))
-                .append("supermarket", SupermarketConverter.toDBObject(s.getNearestSupermarket()))
-                .append("transport", TransportConverter.toDBObject(s.getNearestTransport()));
+                .append("supermarket", SupermarketConverter.toDBObject(s.getNearestSupermarket()));
                 
         if (s.getId() != null)
             builder = builder.append("_id", new ObjectId(s.getId()));

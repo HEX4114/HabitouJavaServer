@@ -21,17 +21,15 @@ public class Square {
     
     private Supermarket nearestSupermarket;
     
-    private Transport nearestTransport;
 
     public Square() {
     }
 
-    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Transport nearestTransport) {
+    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.nearestAtm = nearestAtm;
         this.nearestSupermarket = nearestSupermarket;
-        this.nearestTransport = nearestTransport;
     }
  
     public String getId() {
@@ -73,18 +71,10 @@ public class Square {
     public void setNearestSupermarket(Supermarket nearestSupermarket) {
         this.nearestSupermarket = nearestSupermarket;
     }
-
-    public Transport getNearestTransport() {
-        return nearestTransport;
-    }
-
-    public void setNearestTransport(Transport nearestTransport) {
-        this.nearestTransport = nearestTransport;
-    }
     
     @Override
     public String toString() {
-        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString() + " " + nearestTransport.toString();
+        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString();
     }
     
 }
