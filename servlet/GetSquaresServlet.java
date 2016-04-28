@@ -38,6 +38,7 @@ public class GetSquaresServlet extends HttpServlet {
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
         List<Square> squares = squareDAO.readAllSquares();
         request.setAttribute("squares", squares);
+        
  
         RequestDispatcher rd = getServletContext().getRequestDispatcher(
                 "/index.jsp");
