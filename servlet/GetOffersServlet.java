@@ -46,6 +46,7 @@ public class GetOffersServlet extends HttpServlet {
             out.write("<id>" + s.getId() + "</id>");
             out.write("<lat>" + s.getLatitude() + "</lat>");
             out.write("<long>" + s.getLongitude() + "</long>");
+            out.write("<type>" + s.getType() + "</type>");
             out.write("</offer>");
         }
         out.write("</document>");

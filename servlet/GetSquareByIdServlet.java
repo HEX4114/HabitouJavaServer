@@ -69,7 +69,7 @@ public class GetSquareByIdServlet extends HttpServlet {
                         out.write("<name>" + square.getNearestSupermarket().getWalk().getName() + "</name>");
                         out.write("<lati>" + square.getNearestSupermarket().getWalk().getLatitude() + "</lati>");
                         out.write("<long>" + square.getNearestSupermarket().getWalk().getLongitude() + "</long>");
-                        out.write("<name>" + square.getNearestSupermarket().getWalk().getTime() + "</name>");
+                        out.write("<time>" + square.getNearestSupermarket().getWalk().getTime() + "</time>");
                         out.write("<distance>" + square.getNearestSupermarket().getWalk().getDistance() + "</distance>");
                     out.write("</walk>");
                     out.write("<drive>");
@@ -77,7 +77,7 @@ public class GetSquareByIdServlet extends HttpServlet {
                         out.write("<lati>" + square.getNearestSupermarket().getDrive().getLatitude() + "</lati>");
                         out.write("<long>" + square.getNearestSupermarket().getDrive().getLongitude() + "</long>");
                         out.write("<time>" + square.getNearestSupermarket().getDrive().getTime() + "</time>");
-                        out.write("<distance>" + square.getNearestSupermarket().getDrive().getDistance() + "</time>");
+                        out.write("<distance>" + square.getNearestSupermarket().getDrive().getDistance() + "</distance>");
                     out.write("</drive>");
                 out.write("</supermarket>");
             out.write("</square>");
