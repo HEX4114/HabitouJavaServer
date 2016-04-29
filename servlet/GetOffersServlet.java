@@ -9,46 +9,46 @@ import com.mongodb.MongoClient;
 import dao.MongoDBOfferDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Offer;
+import model.Criterions;
+import model.OfferInformation;
 
 /**
  *
  * @author Sylwia
  */
-@WebServlet("/getOffer")
-public class GetOffreServlet extends HttpServlet {
 
-    @Override
+@WebServlet("/getOffers")
+public class GetOffersServlet extends HttpServlet {
+        @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
-        String id = request.getParameter("id");
-
-        Offer offer = offerDAO.readOffer(id);
+        
+        List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
+        
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
 
         PrintWriter out = response.getWriter();
-
+        
         out.write("<document>");
+        for(OfferInformation s : offers) {
             out.write("<offer>");
-                out.write("<id>" + offer.getId() + "</id>");
-                out.write("<address>" + offer.getAddress() + "</address>");
-                out.write("<lati>" + offer.getLatitude() + "</lati>");
-                out.write("<long>" + offer.getLongitude() + "</long>");
-                out.write("<type>" + offer.getType() + "</type>");
-                out.write("<price>" + offer.getPrice() + "</price>");
-                out.write("<link>" + offer.getLink() + "</link>");
+                out.write("<id>" + s.getId() + "</id>");
+                out.write("<lat>" + s.getLatitude() + "</lat>");
+                out.write("<long>" + s.getLongitude() + "</long>");
             out.write("</offer>");
+        }
         out.write("</document>");
-
+        
     }
-
+    
 }
