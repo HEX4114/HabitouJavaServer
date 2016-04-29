@@ -11,7 +11,7 @@ package model;
  */
 public class Walk extends WayToGo {
     
-    public Walk(String name,Double lat, Double lon, Double time){
-        super(name, lat, lon, time);
+    public Walk(String name,Double lat, Double lon, Double time, Double distance){
+        super(name, lat, lon, time, distance);
     }
 }
