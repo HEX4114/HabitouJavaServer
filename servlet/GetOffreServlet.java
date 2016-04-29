@@ -38,15 +38,15 @@ public class GetOffreServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         out.write("<document>");
-        out.write("<offer>");
-        out.write("<id>" + offer.getId() + "</id>");
-        out.write("<address>" + offer.getAddress() + "</address>");
-        out.write("<lati>" + offer.getLatitude() + "</lati>");
-        out.write("<long>" + offer.getLongitude() + "</long>");
-        out.write("<type>" + offer.getType() + "</type>");
-        out.write("<price>" + offer.getPrice() + "</price>");
-        out.write("<link>" + offer.getLink() + "</link>");
-        out.write("</offer>");
+            out.write("<offer>");
+                out.write("<id>" + offer.getId() + "</id>");
+                out.write("<address>" + offer.getAddress() + "</address>");
+                out.write("<lati>" + offer.getLatitude() + "</lati>");
+                out.write("<long>" + offer.getLongitude() + "</long>");
+                out.write("<type>" + offer.getType() + "</type>");
+                out.write("<price>" + offer.getPrice() + "</price>");
+                out.write("<link>" + offer.getLink() + "</link>");
+            out.write("</offer>");
         out.write("</document>");
 
     }
