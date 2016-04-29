@@ -19,11 +19,14 @@ public abstract class WayToGo {
     
     private Double time;
     
-    public WayToGo(String name,Double lat, Double lon, Double time){
+    private Double distance;
+    
+    public WayToGo(String name,Double lat, Double lon, Double time, Double distance){
         this.name = name;
         this.latitude = lat;
         this.longitude = lon;
         this.time = time;
+        this.distance = distance;
     }
 
     public Double getLatitude() {

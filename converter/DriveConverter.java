@@ -21,7 +21,8 @@ public class DriveConverter {
                 .append("name", d.getName())
                 .append("lat", d.getLatitude())
                 .append("long", d.getLongitude())
-                .append("time", d.getTime());
+                .append("time", d.getTime())
+                .append("distance", d.getDistance());
 
 //        if (a.getId() != null) {
 //            builder = builder.append("_id", new ObjectId(a.getId()));
@@ -32,7 +33,7 @@ public class DriveConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Drive toDrive(DBObject doc) {
-        Drive d = new Drive((String) doc.get("name"), (Double) doc.get("lat"), (Double) doc.get("long"), (Double) doc.get("time"));
+        Drive d = new Drive((String) doc.get("name"), (Double) doc.get("lat"), (Double) doc.get("long"), (Double) doc.get("time"), (Double) doc.get("distance"));
         return d;
     }
 }

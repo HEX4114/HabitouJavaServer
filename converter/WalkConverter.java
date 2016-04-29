@@ -32,7 +32,7 @@ public class WalkConverter {
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
     public static Walk toWalk(DBObject doc) {
-        Walk w = new Walk((String) doc.get("name"), (Double) doc.get("lat"), (Double) doc.get("long"), (Double) doc.get("time"));
+        Walk w = new Walk((String) doc.get("name"), (Double) doc.get("lat"), (Double) doc.get("long"), (Double) doc.get("time"), (Double) doc.get("distance"));
         return w;
     }
 }
