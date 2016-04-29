@@ -23,9 +23,6 @@ public class SquareInformation {
     
     private Double longitude;
     
-    public SquareInformation() {
-    }
-
     public SquareInformation(Square s, Criterions c) {
         this.id = s.getId();
         this.latitude = s.getLatitude();
@@ -125,14 +122,5 @@ public class SquareInformation {
     public String toString() {
         return "SquareInformation{" + "id=" + id + ", colorScore=" + colorScore + ", latitude=" + latitude + ", longitude=" + longitude + '}';
     }
-    
-    
-     public static void main(String[] args) {
-     
-       
-       
-       
-    }
-    
     
 }

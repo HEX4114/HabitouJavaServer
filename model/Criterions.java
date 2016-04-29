@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class Criterions {
     
-    Boolean onCar;
+    private Boolean onCar;
     
-    String atm;
+    private String atm;
     
-    String supermarket;
+    private String supermarket;
    
     
     public Criterions(){

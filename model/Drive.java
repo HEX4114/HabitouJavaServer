@@ -11,8 +11,8 @@ package model;
  */
 public class Drive extends WayToGo {
     
-    public Drive(String name,Double lat, Double lon, Double time){
-        super(name,lat, lon, time);
+    public Drive(String name,Double lat, Double lon, Double time, Double distance){
+        super(name,lat, lon, time, distance);
     }
     
 }
