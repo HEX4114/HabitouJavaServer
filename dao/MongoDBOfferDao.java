@@ -7,9 +7,12 @@ package dao;
 
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import converter.OfferConverter;
+import java.util.ArrayList;
+import java.util.List;
 import model.Offer;
 import org.bson.types.ObjectId;
 
@@ -23,6 +26,17 @@ public class MongoDBOfferDao {
 
     public MongoDBOfferDao(MongoClient mongo) {
         this.col = mongo.getDB("habitoudb").getCollection("offers");
+    }
+
+    public List<Offer> readAllOffers() {
+        List<Offer> data = new ArrayList<Offer>();
+        DBCursor cursor = col.find();
+        while (cursor.hasNext()) {
+            DBObject doc = cursor.next();
+            Offer p = OfferConverter.toOffer(doc);
+            data.add(p);
+        }
+        return data;
     }
 
     public Offer readOffer(String id) {

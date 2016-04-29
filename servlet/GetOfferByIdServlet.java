@@ -20,8 +20,8 @@ import model.Offer;
  *
  * @author Sylwia
  */
-@WebServlet("/getOffer")
-public class GetOffreServlet extends HttpServlet {
+@WebServlet("/getOfferById")
+public class GetOfferByIdServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
