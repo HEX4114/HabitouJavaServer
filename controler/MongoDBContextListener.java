@@ -5,7 +5,6 @@
  */
 package controler;
 
-import java.net.UnknownHostException;
  
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;

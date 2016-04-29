@@ -15,34 +15,37 @@ import org.bson.types.ObjectId;
  * @author Sylwia
  */
 public class OfferConverter {
-    
-        public static DBObject toDBObject(Offer s) {
- 
+
+    public static DBObject toDBObject(Offer of) {
+
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start()
-                .append("address", s.getAddress()).append("lat", s.getLatitude()).append("long", s.getLongitude())
-                .append("type", s.getType())
-                .append("price", s.getPrice())
-                .append("link", s.getLink());
-                
-        if (s.getId() != null)
-            builder = builder.append("_id", new ObjectId(s.getId()));
+                .append("address", of.getAddress())
+                .append("lat", of.getLatitude())
+                .append("long", of.getLongitude())
+                .append("type", of.getType())
+                .append("price", of.getPrice())
+                .append("link", of.getLink());
+
+        if (of.getId() != null) {
+            builder = builder.append("_id", new ObjectId(of.getId()));
+        }
         return builder.get();
     }
- 
+
     // convert DBObject Object to Offer
     // take special note of converting ObjectId to String
     public static Offer toOffer(DBObject doc) {
-        Offer s = new Offer();
-        s.setAddress((String) doc.get("address"));
-        s.setLatitude((Double) doc.get("lat"));
-        s.setLongitude((Double) doc.get("long"));
-        s.setType((String) doc.get("type"));
-        s.setPrice((Double) doc.get("price"));
-        s.setLink((String) doc.get("link"));
+        Offer of = new Offer();
+        of.setAddress((String) doc.get("address"));
+        of.setLatitude((Double) doc.get("lat"));
+        of.setLongitude((Double) doc.get("long"));
+        of.setType((String) doc.get("type"));
+        of.setPrice((Double) doc.get("price"));
+        of.setLink((String) doc.get("link"));
         ObjectId id = (ObjectId) doc.get("_id");
-        s.setId(id.toString());
-        return s;
- 
+        of.setId(id.toString());
+        return of;
+
     }
-    
+
 }
