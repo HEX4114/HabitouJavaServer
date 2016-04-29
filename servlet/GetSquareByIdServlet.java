@@ -68,7 +68,7 @@ public class GetSquareByIdServlet extends HttpServlet {
                     out.write("<name>" + square.getNearestSupermarket().getWalk().getName() + "</name>");
                     out.write("<lati>" + square.getNearestSupermarket().getWalk().getLatitude() + "</lati>");
                     out.write("<long>" + square.getNearestSupermarket().getWalk().getLongitude() + "</long>");
-                    out.write("<name>" + square.getNearestSupermarket().getWalk().getTime() + "</name>");
+                    out.write("<time>" + square.getNearestSupermarket().getWalk().getTime() + "</time>");
                 out.write("</walk>");
                 out.write("<drive>");
                     out.write("<name>" + square.getNearestAtm().getDrive().getName() + "</name>");
