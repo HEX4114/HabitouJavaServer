@@ -29,12 +29,12 @@ public class MongoDBOfferDao {
     }
 
     public List<Offer> readAllOffers() {
-        List<Offer> data = new ArrayList<Offer>();
+        List<Offer> data = new ArrayList<>();
         DBCursor cursor = col.find();
         while (cursor.hasNext()) {
             DBObject doc = cursor.next();
-            Offer p = OfferConverter.toOffer(doc);
-            data.add(p);
+            Offer of = OfferConverter.toOffer(doc);
+            data.add(of);
         }
         return data;
     }
