@@ -24,8 +24,6 @@ public class Offer {
     private Double price;
 
     private String link;
-    
-    private Images images;
 
     public Offer(String address, Double latitude, Double longitude, String type, Double price, String link) {
         this.address = address;
@@ -95,18 +93,11 @@ public class Offer {
         this.link = link;
     }
 
-    public Images getImages() {
-        return images;
-    }
-
-    public void setImages(Images images) {
-        this.images = images;
-    }
-
     @Override
     public String toString() {
-        return "Offer{" + "id=" + id + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", type=" + type + ", price=" + price + ", link=" + link + ", images=" + images + '}';
+        return "Offer{" + "id=" + id + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", type=" + type + ", price=" + price + ", link=" + link + '}';
     }
+
     
 
 }

@@ -24,8 +24,7 @@ public class OfferConverter {
                 .append("long", of.getLongitude())
                 .append("type", of.getType())
                 .append("price", of.getPrice())
-                .append("link", of.getLink())
-                .append("images", ImageConverter.toDBObject(of.getImages()));
+                .append("link", of.getLink());
 
         if (of.getId() != null) {
             builder = builder.append("_id", new ObjectId(of.getId()));
@@ -43,7 +42,6 @@ public class OfferConverter {
         of.setType((String) doc.get("type"));
         of.setPrice((Double) doc.get("price"));
         of.setLink((String) doc.get("link"));
-        of.setImages(ImageConverter.toImages((DBObject)doc.get("images")));
         ObjectId id = (ObjectId) doc.get("_id");
         of.setId(id.toString());
         return of;
