@@ -60,6 +60,15 @@ public abstract class WayToGo {
     public void setTime(Double time) {
         this.time = time;
     }
+
+    public Double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(Double distance) {
+        this.distance = distance;
+    }
+    
     
     
 }
