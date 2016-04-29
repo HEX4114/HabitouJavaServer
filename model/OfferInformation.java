@@ -19,11 +19,14 @@ public class OfferInformation {
     private Double latitude;
 
     private Double longitude;
-
+    
+    private String type;
+    
     public OfferInformation(Offer of) {
         this.id = of.getId();
         this.latitude = of.getLatitude();
         this.longitude = of.getLongitude();
+        this.type = of.getType();
     }
 
     public String getId() {
@@ -48,6 +51,14 @@ public class OfferInformation {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+    
+    public String getType(){
+        return type;
+    }
+    
+    public void setType(String type){
+        this.type = type;
     }
 
     public static List<OfferInformation> convertOffers(List<Offer> offers) {
