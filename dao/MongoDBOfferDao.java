@@ -11,9 +11,14 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import converter.OfferConverter;
+import converter.SquareConverter;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import model.Offer;
+import model.Square;
 import org.bson.types.ObjectId;
 
 /**
@@ -44,6 +49,17 @@ public class MongoDBOfferDao {
                 .append("_id", new ObjectId(id)).get();
         DBObject data = this.col.findOne(query);
         return OfferConverter.toOffer(data);
+    }
+    
+    public Offer createOffer(Offer of) {
+        DBObject doc = OfferConverter.toDBObject(of);
+        this.col.insert(doc);
+        ObjectId id = (ObjectId) doc.get("_id");
+        of.setId(id.toString());
+        return of;
+    }
+    
+    public static void main(String[] args){
     }
     
 }
