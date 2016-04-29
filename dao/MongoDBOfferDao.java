@@ -45,5 +45,12 @@ public class MongoDBOfferDao {
         DBObject data = this.col.findOne(query);
         return OfferConverter.toOffer(data);
     }
+    
+    public static void main(String [] args)
+    {
+         MongoDBOfferDao dao = new MongoDBOfferDao(new MongoClient("localhost", 27017));
+         List<Offer> test = dao.readAllOffers();
+         System.out.println(test);
+    }
 
 }

@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,26 +13,15 @@ import java.util.List;
  * @author François
  */
 public class Images {
-    
-    private String id;
-    
+       
     private List<String> imagesNamesList;
     
     public Images(){
-        
+        imagesNamesList = new ArrayList<>();
     }
     
-    public Images(String id, List<String> imagesNamesList){
-        this.id = id;
+    public Images(List<String> imagesNamesList){
         this.imagesNamesList = imagesNamesList;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public List<String> getImagesNamesList() {
@@ -46,5 +36,15 @@ public class Images {
     {
         imagesNamesList.add(name);
     }
+
+    @Override
+    public String toString() {
+        return "Images{" + "imagesNamesList=" + imagesNamesList + '}';
+    }
+    
+    
+
+    
+    
     
 }

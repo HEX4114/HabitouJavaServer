@@ -19,11 +19,12 @@ public class ImageConverter {
     public static DBObject toDBObject(Images i) {
         
         BasicDBObjectBuilder builder = BasicDBObjectBuilder.start();
-        if (i.getId() != null)
-               builder = builder.append("_id", new ObjectId(i.getId()));
+        
+        Integer j = 0;
         for(String s : i.getImagesNamesList())
         {
-           builder = builder.append("name", s);
+           builder = builder.append("name"+j, s);
+           j++;
         }
         
         return builder.get();
@@ -34,10 +35,15 @@ public class ImageConverter {
     public static Images toImages(DBObject doc) {
         
         Images i = new Images();
-        ObjectId id = (ObjectId) doc.get("_id");
-        i.setId(id.toString());
-        String name = (String) doc.get("name");
-        i.addImageName(name);
+        
+        Integer j = 0;
+        String name = (String) doc.get("name"+j);
+        while(name != null)
+        {
+            i.addImageName(name);
+            j++;
+            name = (String) doc.get("name"+j);
+        }
         
         return i;
     }
