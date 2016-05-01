@@ -6,8 +6,11 @@ import dao.MongoDBOfferDao;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,14 +30,22 @@ public class AddOfferServlet extends HttpServlet {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
         MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
-        String adress = request.getParameter("adress");
+        String address = request.getParameter("address");
         String type = request.getParameter("type");
         String link = request.getParameter("link");
         Double price = Double.parseDouble(request.getParameter("price"));
         Double lat = null;
         Double lng = null;
+
+        String encodedAddress = URLEncoder.encode(address, "UTF-8")
+                .replaceAll("\\+", "%20")
+                .replaceAll("\\%21", "!")
+                .replaceAll("\\%27", "'")
+                .replaceAll("\\%28", "(")
+                .replaceAll("\\%29", ")")
+                .replaceAll("\\%7E", "~");
         
-        URL yahoo = new URL("https://maps.googleapis.com/maps/api/geocode/xml?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyArobVSwthXEPCYJFsepnC0yRz13ER9EQU");
+        URL yahoo = new URL("https://maps.googleapis.com/maps/api/geocode/xml?address="+encodedAddress+"&key=AIzaSyArobVSwthXEPCYJFsepnC0yRz13ER9EQU");
         URLConnection yc = yahoo.openConnection();
         BufferedReader in = new BufferedReader(
                                 new InputStreamReader(
@@ -49,7 +60,7 @@ public class AddOfferServlet extends HttpServlet {
             {
                 String value = inputLine.replaceFirst("<lat>", "");
                 value = value.replaceFirst("</lat>", "");
-                lat = Double.parseDouble(inputLine);
+                lat = Double.parseDouble(value);
                 continue;
             }
             
@@ -57,13 +68,13 @@ public class AddOfferServlet extends HttpServlet {
             {
                 String value = inputLine.replaceFirst("<lng>", "");
                 value = value.replaceFirst("</lng>", "");
-                lng = Double.parseDouble(inputLine);
+                lng = Double.parseDouble(value);
                 break;
             }
         }
         in.close();
         
-        Offer offer = new Offer(adress, lat, lng, type, price, link);
+        Offer offer = new Offer(URLDecoder.decode(address, "UTF-8"), lat, lng, type, price, link);
         
         offerDAO.createOffer(offer);
 
