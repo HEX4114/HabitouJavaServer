@@ -110,7 +110,7 @@ public class Criterions {
             
             if(result < 0.0)
             {
-                result = 0.0;
+                result = 0.00000000001;
             }
             
         }
