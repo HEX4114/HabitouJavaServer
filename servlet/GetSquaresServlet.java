@@ -21,14 +21,21 @@ import javax.servlet.http.HttpServletResponse;
 
 
 import com.mongodb.MongoClient;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.Response;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
 import model.Criterions;
 import model.SquareInformation;
+import model.Adress;
+import model.Walk;
+import model.Drive;
  
 @WebServlet("/getSquares")
 public class GetSquaresServlet extends HttpServlet {
  
+    OkHttpClient client = new OkHttpClient();
     private static final long serialVersionUID = -6554920927964049383L;
  
     @Override
@@ -38,12 +45,19 @@ public class GetSquaresServlet extends HttpServlet {
                 .getAttribute("MONGO_CLIENT");
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
         
-        Criterions criterions = getCriterions(request);
+        response.setContentType("text/xml");
+        response.setHeader("Cache-Control", "no-cache");
+        
+        Criterions criterions;
+        try {
+            criterions = getCriterions(request);
+        } catch(Exception e) {
+            response.setStatus(204);
+            return;
+        }
         
         List<SquareInformation> squares = SquareInformation.convertSquares(squareDAO.readAllSquares(), criterions);
         
-        response.setContentType("text/xml");
-        response.setHeader("Cache-Control", "no-cache");
 
         PrintWriter out = response.getWriter();
         
@@ -61,25 +75,79 @@ public class GetSquaresServlet extends HttpServlet {
         
     }
     
-    private Criterions getCriterions(HttpServletRequest request){
+    private Criterions getCriterions(HttpServletRequest request) throws Exception {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
+        String adress = request.getParameter("adress");
+        Adress adressLocation;
+        if(adress != "null") {
+            adressLocation = getLocationFromAdress(request.getParameter("adressstring"));
+        } else {
+            Walk walk = new Walk("", 0.0, 0.0, 0.0, 0.0);
+            Drive drive = new Drive("", 0.0, 0.0, 0.0, 0.0);
+            adressLocation = new Adress(walk, drive);
+        }
+        
         
         Boolean car;
         
-        if(onCar.equals("y"))
-        {
+        if(onCar.equals("y")) {
             car = true;
         }
-        else
-        {
+        else {
             car = false;
         }
         
         
-        Criterions result = new Criterions(car, atm, supermarket);
+        Criterions result = new Criterions(car, atm, supermarket, adress, adressLocation);
         
         return result;
+    }
+    
+    private Adress getLocationFromAdress(String adressString) throws Exception {
+        String requestFindPlace = "http://maps.googleapis.com/maps/api/geocode/json?address=" + adressString + "&key=AIzaSyAjCKf6zCL0EwJegJ4sV1wBu3T3gQ3fENA";
+        
+        Request request = new Request.Builder().url(requestFindPlace).build();
+        //OkHttpClient client = new OkHttpClient();
+        String result = "";
+
+        try {
+            Response response = client.newCall(request).execute();
+            result = response.body().string();
+        } catch (Exception e) {
+            System.out.println("Error : IOException in loadAdressDatas");
+        }
+        
+        String status = getInfosFromJsonResponse(result, "status");
+        if(status == "ZERO_RESULTS") {
+            throw new Exception();
+        }
+        double lat = Double.parseDouble(getInfosFromJsonResponse(result, "lat"));
+        double lng = Double.parseDouble(getInfosFromJsonResponse(result, "lng"));
+        
+        Walk walk = new Walk("", lat, lng, 0.0, 0.0);
+        Drive drive = new Drive("", lat, lng, 0.0, 0.0);
+        return new Adress(walk, drive);
+    }
+    
+    public String getInfosFromJsonResponse(String responseServer, String info)
+    {
+        String responsePart = "";
+        String[] responseParsed = responseServer.split(",");
+        for(int i = 0; i < responseParsed.length; i++)
+        {
+            if(responseParsed[i].contains("\""+info+"\" :"))
+            {
+                responsePart = responseParsed[i].split(" : ")[1];
+                if(info == "lng") {
+                    responsePart = responseParsed[i].split(" ")[0];
+                } else if(info == "lat") {
+                    responsePart = responseParsed[i].split(",")[0];
+                }
+                return responsePart;
+            }
+        }
+        return "0.0";
     }
 }

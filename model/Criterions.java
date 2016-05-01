@@ -20,17 +20,21 @@ public class Criterions {
     
     private String supermarket;
    
+    private String adress;
+    
+    private Adress adressLocation;
     
     public Criterions(){
         
     }
     
-    public Criterions(Boolean onCar, String atm, String supermarket) {
+    public Criterions(Boolean onCar, String atm, String supermarket, String adress, Adress adressLocation) {
         
         this.onCar = onCar;
         this.atm = atm;
         this.supermarket = supermarket;
-        
+        this.adress = adress;
+        this.adressLocation = adressLocation;
     }
 
     public Boolean isOnCar() {
@@ -57,6 +61,21 @@ public class Criterions {
         this.supermarket = supermarket;
     }
 
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+    
+    public Adress getAdressLocation() {
+        return adressLocation;
+    }
+
+    public void setAdressLocation(Adress adressLocation) {
+        this.adressLocation = adressLocation;
+    }
     
     private Double getMin(List<Double> listDouble)
     {
@@ -73,7 +92,6 @@ public class Criterions {
     
     public Double getScore(Square s, String typePlace)
     {
-        
         Double maxDistance = 0.0;
         Double distanceOnFoot = 0.0;
         Double distanceOnCar = 0.0;
@@ -90,7 +108,12 @@ public class Criterions {
             distanceOnFoot = s.getNearestSupermarket().getWalk().getTime();
             distanceOnCar = s.getNearestSupermarket().getDrive().getTime();
         }
-        
+        else if(typePlace.equals("Adress"))
+        {
+            s.loadAdressInformations(this.adressLocation);
+            distanceOnFoot = s.getAdress().getWalk().getTime();
+            distanceOnCar = s.getAdress().getDrive().getTime();
+        }
         
         Double result;
         if(distanceOnFoot < maxDistance
