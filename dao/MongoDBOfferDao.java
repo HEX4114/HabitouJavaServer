@@ -11,14 +11,9 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import converter.OfferConverter;
-import converter.SquareConverter;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import model.Offer;
-import model.Square;
 import org.bson.types.ObjectId;
 
 /**
