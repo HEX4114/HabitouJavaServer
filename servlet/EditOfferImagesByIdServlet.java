@@ -23,29 +23,33 @@ public class EditOfferImagesByIdServlet extends HttpServlet {
           // Get the absolute path of the image
         
         String id = request.getParameter("id");
-        File directory = new File("C:/data/images/"+id);
+        File directory = new File(cntx.getContextPath()+"/resources/images/"+id+"/");
+        directory.mkdirs();
         //get all the files from a directory
         File[] fList = directory.listFiles();
-        String mime = cntx.getMimeType(fList[0].getAbsolutePath());
-        if (mime == null) {
-          response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-          return;
+        
+        if(fList[0] != null){
+            String mime = cntx.getMimeType(fList[0].getAbsolutePath());
+            if (mime == null) {
+              response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+              return;
+            }
+
+            response.setContentType(mime);
+            File file = new File(fList[0].getAbsolutePath());
+            response.setContentLength((int)file.length());
+
+            FileInputStream in = new FileInputStream(file);
+            OutputStream out = response.getOutputStream();
+
+            // Copy the contents of the file to the output stream
+             byte[] buf = new byte[1024];
+             int count = 0;
+             while ((count = in.read(buf)) >= 0) {
+               out.write(buf, 0, count);
+            }
+            out.close();
+            in.close();
         }
-
-        response.setContentType(mime);
-        File file = new File(fList[0].getAbsolutePath());
-        response.setContentLength((int)file.length());
-
-        FileInputStream in = new FileInputStream(file);
-        OutputStream out = response.getOutputStream();
-
-        // Copy the contents of the file to the output stream
-         byte[] buf = new byte[1024];
-         int count = 0;
-         while ((count = in.read(buf)) >= 0) {
-           out.write(buf, 0, count);
-        }
-        out.close();
-        in.close();
     }
 }
