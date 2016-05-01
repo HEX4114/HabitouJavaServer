@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/editOfferImagesById")
-public class EditOfferImagesByIdServlet extends HttpServlet {
+@WebServlet("/getOfferImagesById")
+public class GetOfferImagesByIdServlet extends HttpServlet {
 
 
     @Override
