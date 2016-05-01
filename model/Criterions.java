@@ -74,7 +74,6 @@ public class Criterions {
     public Double getScore(Square s, String typePlace)
     {
         
-        
         Double maxDistance = 0.0;
         Double distanceOnFoot = 0.0;
         Double distanceOnCar = 0.0;
@@ -101,7 +100,8 @@ public class Criterions {
         }
         else
         {
-            List<Double> listDistance = new ArrayList<>(); listDistance.add(distanceOnFoot);
+            List<Double> listDistance = new ArrayList<>(); 
+            listDistance.add(distanceOnFoot);
             if(onCar)
                 listDistance.add(distanceOnCar);
             Double minDistance = getMin(listDistance);

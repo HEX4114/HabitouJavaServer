@@ -23,6 +23,7 @@ import com.mongodb.MongoClient;
 import model.Square;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
+import model.Criterions;
  
 @WebServlet("/getSquareById")
 public class GetSquareByIdServlet extends HttpServlet {
@@ -37,6 +38,7 @@ public class GetSquareByIdServlet extends HttpServlet {
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
         String id = request.getParameter("id");
         
+        Criterions criterions = getCriterions(request);
         Square square = squareDAO.readSquare(id);
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
@@ -63,6 +65,7 @@ public class GetSquareByIdServlet extends HttpServlet {
                         out.write("<time>" + square.getNearestAtm().getDrive().getTime() + "</time>");
                         out.write("<distance>" + square.getNearestAtm().getDrive().getDistance() + "</distance>");
                     out.write("</drive>");
+                    out.write("<score>" + square.getAtmScore(criterions) + "</score>");
                 out.write("</atm>");
                 out.write("<supermarket>");
                     out.write("<walk>");
@@ -79,8 +82,32 @@ public class GetSquareByIdServlet extends HttpServlet {
                         out.write("<time>" + square.getNearestSupermarket().getDrive().getTime() + "</time>");
                         out.write("<distance>" + square.getNearestSupermarket().getDrive().getDistance() + "</distance>");
                     out.write("</drive>");
+                    out.write("<score>" + square.getSupermarketScore(criterions) + "</score>");
                 out.write("</supermarket>");
             out.write("</square>");
         out.write("</document>");
+    }
+    
+    
+    private Criterions getCriterions(HttpServletRequest request){
+        String onCar = request.getParameter("car");
+        String atm = request.getParameter("atm");
+        String supermarket = request.getParameter("supermarket");
+        
+        Boolean car;
+        
+        if(onCar.equals("y"))
+        {
+            car = true;
+        }
+        else
+        {
+            car = false;
+        }
+        
+        
+        Criterions result = new Criterions(car, atm, supermarket);
+        
+        return result;
     }
 }

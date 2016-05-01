@@ -50,10 +50,10 @@ public class GetSquaresServlet extends HttpServlet {
         out.write("<document>");
         for(SquareInformation s : squares) {
             out.write("<square>");
-                out.write("<id>" + s.getId() + "</id>");
-                out.write("<lat>" + s.getLatitude() + "</lat>");
-                out.write("<long>" + s.getLongitude() + "</long>");
-                out.write("<score>" + s.getColorScore() + "</score>");
+            out.write("<id>" + s.getId() + "</id>");
+            out.write("<lat>" + s.getLatitude() + "</lat>");
+            out.write("<long>" + s.getLongitude() + "</long>");
+            out.write("<score>" + s.getColorScore() + "</score>");
             out.write("</square>");
         }
         out.write("</document>");

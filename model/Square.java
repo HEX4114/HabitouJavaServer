@@ -5,6 +5,9 @@
  */
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author François
@@ -20,7 +23,6 @@ public class Square {
     private Atm nearestAtm;
     
     private Supermarket nearestSupermarket;
-    
 
     public Square() {
     }
@@ -71,6 +73,25 @@ public class Square {
     public void setNearestSupermarket(Supermarket nearestSupermarket) {
         this.nearestSupermarket = nearestSupermarket;
     }
+    
+    public Double getAtmScore(Criterions c)
+    {
+        if(c.getAtm().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getScore(this, "Atm");
+    }
+    
+    public Double getSupermarketScore(Criterions c)
+    {
+        if(c.getSupermarket().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getScore(this, "Supermarket");
+    }
+    
     
     @Override
     public String toString() {
