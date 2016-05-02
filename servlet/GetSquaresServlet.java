@@ -81,12 +81,12 @@ public class GetSquaresServlet extends HttpServlet {
         String supermarket = request.getParameter("supermarket");
         String adress = request.getParameter("adress");
         Adress adressLocation;
-        if(adress != "null") {
-            adressLocation = getLocationFromAdress(request.getParameter("adressstring"));
-        } else {
+        if(adress.equals("null")) {
             Walk walk = new Walk("", 0.0, 0.0, 0.0, 0.0);
             Drive drive = new Drive("", 0.0, 0.0, 0.0, 0.0);
             adressLocation = new Adress(walk, drive);
+        } else {
+            adressLocation = getLocationFromAdress(request.getParameter("adressstring"));
         }
         
         
@@ -106,25 +106,34 @@ public class GetSquaresServlet extends HttpServlet {
     }
     
     private Adress getLocationFromAdress(String adressString) throws Exception {
-        String requestFindPlace = "http://maps.googleapis.com/maps/api/geocode/json?address=" + adressString + "&key=AIzaSyAjCKf6zCL0EwJegJ4sV1wBu3T3gQ3fENA";
-        
+        String requestFindPlace = "https://maps.googleapis.com/maps/api/geocode/json?address=" + adressString + "&key=AIzaSyAjCKf6zCL0EwJegJ4sV1wBu3T3gQ3fENA";
+        requestFindPlace = requestFindPlace.replaceAll(" ", "+");
         Request request = new Request.Builder().url(requestFindPlace).build();
-        //OkHttpClient client = new OkHttpClient();
+        
         String result = "";
 
         try {
             Response response = client.newCall(request).execute();
             result = response.body().string();
         } catch (Exception e) {
-            System.out.println("Error : IOException in loadAdressDatas");
+            System.out.println("Error : IOException in loadAdressDatas (Requête Google)");
+            System.out.println(e.getCause());
+            System.out.println(e.getMessage());
+            System.out.println(e.toString());
+            System.out.println(e.getStackTrace());
+            System.out.println(requestFindPlace);
         }
         
         String status = getInfosFromJsonResponse(result, "status");
         if(status == "ZERO_RESULTS") {
+            System.out.println("pas de résultat....");
             throw new Exception();
         }
-        double lat = Double.parseDouble(getInfosFromJsonResponse(result, "lat"));
-        double lng = Double.parseDouble(getInfosFromJsonResponse(result, "lng"));
+        
+        String latString = getInfosFromJsonResponse(result, "lat");
+        String lngString = getInfosFromJsonResponse(result, "lng");
+        double lat = Double.parseDouble(latString);
+        double lng = Double.parseDouble(lngString);
         
         Walk walk = new Walk("", lat, lng, 0.0, 0.0);
         Drive drive = new Drive("", lat, lng, 0.0, 0.0);
@@ -139,11 +148,13 @@ public class GetSquaresServlet extends HttpServlet {
         {
             if(responseParsed[i].contains("\""+info+"\" :"))
             {
-                responsePart = responseParsed[i].split(" : ")[1];
-                if(info == "lng") {
-                    responsePart = responseParsed[i].split(" ")[0];
-                } else if(info == "lat") {
-                    responsePart = responseParsed[i].split(",")[0];
+                responsePart = responseParsed[i].split("\""+info+"\" : ")[1];
+                if(info.equals("lng")) {
+                    responsePart = responsePart.split("\n")[0];
+                } 
+                if(info.equals("status")) {
+                    responsePart = responsePart.split("\n")[0];
+                    responsePart = responsePart.replaceAll("\"", "");
                 }
                 return responsePart;
             }

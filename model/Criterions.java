@@ -110,7 +110,8 @@ public class Criterions {
         }
         else if(typePlace.equals("Adress"))
         {
-            s.loadAdressInformations(this.adressLocation);
+            s.loadAdressInformations(this.adressLocation, this.onCar);
+            maxDistance = Double.parseDouble(adress);
             distanceOnFoot = s.getAdress().getWalk().getTime();
             distanceOnCar = s.getAdress().getDrive().getTime();
         }

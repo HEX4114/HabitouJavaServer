@@ -93,7 +93,7 @@ public class Square {
         this.adress = adress;
     }
     
-    public void loadAdressInformations(Adress adressLocation) {
+    public void loadAdressInformations(Adress adressLocation, Boolean onCar) {
         String port;
         String origin;
         String destination;
@@ -113,19 +113,19 @@ public class Square {
         destination = lng + "," + lat;
         
         // Walk
-        port = "5002";
+        port = "5001";
         requestResponse = getAdressRequest(port, origin, destination);
-        distance = getInfosFromJsonResponse(requestResponse, "distance") / 2;
-        time = getInfosFromJsonResponse(requestResponse, "duration") / 2;
+        distance = getInfosFromJsonResponse(requestResponse, "distance");
+        time = getInfosFromJsonResponse(requestResponse, "duration");
         walk.setDistance(distance);
         walk.setTime(time);
         
-        if(time > 3*60) {
+        if(time > 3*60 && onCar) {
             // Drive
-            port = "5003";
+            port = "5000";
             requestResponse = getAdressRequest(port, origin, destination);
-            distance = getInfosFromJsonResponse(requestResponse, "distance") / 2;
-            time = getInfosFromJsonResponse(requestResponse, "duration") / 2;
+            distance = getInfosFromJsonResponse(requestResponse, "distance");
+            time = getInfosFromJsonResponse(requestResponse, "duration");
         }
         drive.setDistance(distance);
         drive.setTime(time);
@@ -135,19 +135,17 @@ public class Square {
     }
     
     private String getAdressRequest(String port, String origin, String destination) {
-        String urlRequest = "http://176.135.252.82:" + port + "/trip/v1/walking/" + origin + ";" + destination;
+        String urlRequest = "http://192.168.1.2:" + port + "/route/v1/walking/" + origin + ";" + destination;
         Request request = new Request.Builder().url(urlRequest).build();
         //OkHttpClient client = new OkHttpClient();
         String result = "";
 
+        System.out.println("eeeeeeeeeeet Requete Adrien !)");
         try {
             Response response = client.newCall(request).execute();
             result = response.body().string();
         } catch (Exception e) {
-            System.out.println("Error : IOException in getAdressRequest");
-            System.out.println(e.getMessage());
-            System.out.println(e.getCause());
-            System.out.println(e.toString());
+            System.out.println("Error : IOException in getAdressRequest (requete à adrien)");
         }
         
         return result;
@@ -159,9 +157,9 @@ public class Square {
         String[] responseParsed = responseServer.split(",");
         for(int i = 0; i < responseParsed.length; i++)
         {
-            if(responseParsed[i].contains("\""+info+"\" :"))
+            if(responseParsed[i].contains("\""+info+"\":"))
             {
-                responsePart = responseParsed[i].split(" : ")[1];
+                responsePart = responseParsed[i].split("\""+info+"\":")[1];
                 if(info == "distance") {
                     responsePart = responsePart.substring(0, responsePart.length()-2);
                 }
