@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author François
  */
-public class Criterions {
+public class SquareCriteria {
     
     private Boolean onCar;
     
@@ -21,11 +21,11 @@ public class Criterions {
     private String supermarket;
    
     
-    public Criterions(){
+    public SquareCriteria(){
         
     }
     
-    public Criterions(Boolean onCar, String atm, String supermarket) {
+    public SquareCriteria(Boolean onCar, String atm, String supermarket) {
         
         this.onCar = onCar;
         this.atm = atm;

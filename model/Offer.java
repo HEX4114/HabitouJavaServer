@@ -24,13 +24,12 @@ public class Offer {
     private Double price;
 
     private String link;
-    
+
     private Integer rooms;
-    
+
     private Integer floor;
-    
+
     private Double m2;
-            
 
     public Offer(String address, Double latitude, Double longitude, String type, Double price, String link) {
         this.address = address;
@@ -52,8 +51,6 @@ public class Offer {
         this.floor = floor;
         this.m2 = m2;
     }
-    
-    
 
     public Offer() {
     }
@@ -98,6 +95,14 @@ public class Offer {
         this.type = type;
     }
 
+    boolean toBuy() {
+        return type.equals("vendre") || type.equals("buy");
+    }
+
+    boolean toRent() {
+        return type.equals("louer") || type.equals("rent");
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -137,14 +142,11 @@ public class Offer {
     public void setM2(Double m2) {
         this.m2 = m2;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "Offer{" + "id=" + id + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", type=" + type + ", price=" + price + ", link=" + link + '}';
+        return "Offer{" + "id=" + id + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", type=" + type + ", price=" + price + ", link=" + link 
+                + ", floor=" + floor + ", rooms=" + rooms + ", price=" + price + '}';
     }
-
-    
 
 }

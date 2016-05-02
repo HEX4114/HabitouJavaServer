@@ -23,7 +23,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mongodb.MongoClient;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
-import model.Criterions;
+import model.SquareCriteria;
 import model.SquareInformation;
  
 @WebServlet("/getSquares")
@@ -38,7 +38,7 @@ public class GetSquaresServlet extends HttpServlet {
                 .getAttribute("MONGO_CLIENT");
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
         
-        Criterions criterions = getCriterions(request);
+        SquareCriteria criterions = getSquareCriteria(request);
         
         List<SquareInformation> squares = SquareInformation.convertSquares(squareDAO.readAllSquares(), criterions);
         
@@ -61,25 +61,13 @@ public class GetSquaresServlet extends HttpServlet {
         
     }
     
-    private Criterions getCriterions(HttpServletRequest request){
+    private SquareCriteria getSquareCriteria(HttpServletRequest request){
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
         
-        Boolean car;
+        Boolean car = onCar.equals("y");        
         
-        if(onCar.equals("y"))
-        {
-            car = true;
-        }
-        else
-        {
-            car = false;
-        }
-        
-        
-        Criterions result = new Criterions(car, atm, supermarket);
-        
-        return result;
+        return new SquareCriteria(car, atm, supermarket);
     }
 }

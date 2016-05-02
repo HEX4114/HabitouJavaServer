@@ -23,7 +23,7 @@ public class SquareInformation {
     
     private Double longitude;
     
-    public SquareInformation(Square s, Criterions c) {
+    public SquareInformation(Square s, SquareCriteria c) {
         this.id = s.getId();
         this.latitude = s.getLatitude();
         this.longitude = s.getLongitude();
@@ -62,7 +62,7 @@ public class SquareInformation {
         this.longitude = longitude;
     }
     
-    private List<Double> makeScoreList(Square s, Criterions c)
+    private List<Double> makeScoreList(Square s, SquareCriteria c)
     {
         List<Double> scores = new ArrayList<>();
         if(!c.getAtm().equals("null"))
@@ -78,7 +78,7 @@ public class SquareInformation {
     }
     
     
-    private Double getSquareColor(Square s, Criterions c){
+    private Double getSquareColor(Square s, SquareCriteria c){
         
         List<Double> scores = makeScoreList(s,c);
         
@@ -105,7 +105,7 @@ public class SquareInformation {
         return finalScoreResult;
     }
     
-    public static List<SquareInformation> convertSquares(List<Square> squares, Criterions c)
+    public static List<SquareInformation> convertSquares(List<Square> squares, SquareCriteria c)
     {
         List<SquareInformation> result = new ArrayList<>();
         
