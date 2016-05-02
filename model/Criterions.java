@@ -93,8 +93,8 @@ public class Criterions {
         
         
         Double result;
-        if(distanceOnFoot < maxDistance
-           || (distanceOnCar < maxDistance && onCar))
+        if(distanceOnFoot <= maxDistance
+           || (distanceOnCar <= maxDistance && onCar))
         {
             result = 1.0;
         }
