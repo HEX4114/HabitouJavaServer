@@ -35,16 +35,21 @@ public class GetOffersServlet extends HttpServlet {
         MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
 
         List<OfferInformation> offers;
-        
+
         if (request.getParameterMap().isEmpty()) {
             offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
         } else {
-            OfferCriteria criterions = getCriteria(request);
-            offers = OfferInformation.convertOffers(offerDAO.readAllOffers(), criterions);
+            OfferCriteria criteria = getCriteria(request);
+            offers = OfferInformation.convertOffers(offerDAO.readAllOffers(), criteria);
         }
 
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
+
+//        for (OfferInformation s : offers) {
+//            System.out.println("<offer>");
+//            System.out.println("<id> " + offerDAO.readOffer(s.getId()));
+//        }
 
         PrintWriter out = response.getWriter();
 
@@ -60,7 +65,7 @@ public class GetOffersServlet extends HttpServlet {
         out.write("</document>");
 
     }
-        //    public static void main(String[] args) {
+    //    public static void main(String[] args) {
     //        MongoClient mongo = new MongoClient();
     //        MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
     //
@@ -80,12 +85,35 @@ public class GetOffersServlet extends HttpServlet {
         String rent = request.getParameter("rent");
         String rooms = request.getParameter("rooms");
         String floor = request.getParameter("floor");
-        String maxPrice = request.getParameter("maxPrice");
+        String maxPrice = request.getParameter("price");
+        
+        OfferCriteria criteria = new OfferCriteria();
+        
+        if (buy != null) {
+            criteria.setToBuy(buy.equals("y"));
+        } else {
+            criteria.setToBuy(false);
+        }
 
-        Boolean toBuy = buy.equals("y");
-        Boolean toRent = rent.equals("y");
+        if (rent != null) {
+            criteria.setToRent(rent.equals("y"));
+        } else {
+            criteria.setToRent(false);
+        }
+        
+        if(rooms!=null) {
+            criteria.setRooms(Integer.parseInt(rooms));
+        }
+        
+        if(floor!=null) {
+            criteria.setFloor(Integer.parseInt(floor));
+        }
+        
+        if(maxPrice!=null) {
+            criteria.setMaxPrice(Integer.parseInt(maxPrice)*1000);
+        }
 
-        return new OfferCriteria(toBuy, toRent, Integer.parseInt(rooms), Integer.parseInt(floor), Integer.parseInt(maxPrice));
+        return criteria;
 
     }
 
