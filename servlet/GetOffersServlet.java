@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.OfferCriteria;
 import model.OfferInformation;
 
 /**
@@ -33,7 +34,14 @@ public class GetOffersServlet extends HttpServlet {
                 .getAttribute("MONGO_CLIENT");
         MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
 
-        List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
+        List<OfferInformation> offers;
+        
+        if (request.getParameterMap().isEmpty()) {
+            offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
+        } else {
+            OfferCriteria criterions = getCriteria(request);
+            offers = OfferInformation.convertOffers(offerDAO.readAllOffers(), criterions);
+        }
 
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
@@ -52,18 +60,33 @@ public class GetOffersServlet extends HttpServlet {
         out.write("</document>");
 
     }
+        //    public static void main(String[] args) {
+    //        MongoClient mongo = new MongoClient();
+    //        MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
+    //
+    //        //OfferCriteria criterions = new OfferCriteria(true, true, null, null, null);
+    //        List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
+    //        //List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers(), criterions);
+    //
+    //        for (OfferInformation s : offers) {
+    //            System.out.println("<offer>");
+    //            System.out.println("<id> " + offerDAO.readOffer(s.getId()));
+    //        }
+    //
+    //    }
 
-//    public static void main(String[] args) {
-//        MongoClient mongo = new MongoClient();
-//        MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
-//
-//        List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
-//
-//        for (OfferInformation s : offers) {
-//            System.out.println("<offer>");
-//            System.out.println("<id> " + s.getId() + " " + s.getLatitude() + " " + s.getLongitude() + "</long>");
-//        }
-//
-//    }
+    private OfferCriteria getCriteria(HttpServletRequest request) {
+        String buy = request.getParameter("buy");
+        String rent = request.getParameter("rent");
+        String rooms = request.getParameter("rooms");
+        String floor = request.getParameter("floor");
+        String maxPrice = request.getParameter("maxPrice");
+
+        Boolean toBuy = buy.equals("y");
+        Boolean toRent = rent.equals("y");
+
+        return new OfferCriteria(toBuy, toRent, Integer.parseInt(rooms), Integer.parseInt(floor), Integer.parseInt(maxPrice));
+
+    }
 
 }

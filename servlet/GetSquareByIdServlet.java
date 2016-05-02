@@ -23,7 +23,7 @@ import com.mongodb.MongoClient;
 import model.Square;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
-import model.Criterions;
+import model.SquareCriteria;
  
 @WebServlet("/getSquareById")
 public class GetSquareByIdServlet extends HttpServlet {
@@ -38,7 +38,7 @@ public class GetSquareByIdServlet extends HttpServlet {
         MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
         String id = request.getParameter("id");
         
-        Criterions criterions = getCriterions(request);
+        SquareCriteria criterions = getCriterions(request);
         Square square = squareDAO.readSquare(id);
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
@@ -89,7 +89,7 @@ public class GetSquareByIdServlet extends HttpServlet {
     }
     
     
-    private Criterions getCriterions(HttpServletRequest request){
+    private SquareCriteria getCriterions(HttpServletRequest request){
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
@@ -106,7 +106,7 @@ public class GetSquareByIdServlet extends HttpServlet {
         }
         
         
-        Criterions result = new Criterions(car, atm, supermarket);
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket);
         
         return result;
     }
