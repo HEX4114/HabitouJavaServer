@@ -24,6 +24,13 @@ public class Offer {
     private Double price;
 
     private String link;
+    
+    private Integer rooms;
+    
+    private Integer floor;
+    
+    private Double m2;
+            
 
     public Offer(String address, Double latitude, Double longitude, String type, Double price, String link) {
         this.address = address;
@@ -33,6 +40,20 @@ public class Offer {
         this.price = price;
         this.link = link;
     }
+
+    public Offer(String address, Double latitude, Double longitude, String type, Double price, String link, Integer rooms, Integer floor, Double m2) {
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.type = type;
+        this.price = price;
+        this.link = link;
+        this.rooms = rooms;
+        this.floor = floor;
+        this.m2 = m2;
+    }
+    
+    
 
     public Offer() {
     }
@@ -92,6 +113,32 @@ public class Offer {
     public void setLink(String link) {
         this.link = link;
     }
+
+    public Integer getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(Integer rooms) {
+        this.rooms = rooms;
+    }
+
+    public Integer getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Integer floor) {
+        this.floor = floor;
+    }
+
+    public Double getM2() {
+        return m2;
+    }
+
+    public void setM2(Double m2) {
+        this.m2 = m2;
+    }
+    
+    
 
     @Override
     public String toString() {
