@@ -83,9 +83,9 @@ public class OfferInformation {
                 continue;
             } else if(criteria.getToBuy()==false && criteria.getToRent()==false) {
                 continue;
-            } else if(criteria.getRooms()!=null && criteria.getRooms()<offer.getRooms()) {
+            } else if(criteria.getRooms()!=null && criteria.getRooms() > offer.getRooms()) {
                 continue;
-            } else if(criteria.getFloor()!=null && criteria.getFloor()<offer.getFloor()) {
+            } else if(criteria.getFloor()!=null && criteria.getFloor()!= offer.getFloor()) {
                 continue;
             } else if(criteria.getMaxPriceBuy()!=null && offer.toBuy() && criteria.getMaxPriceBuy()<offer.getPrice()) {
                 continue;

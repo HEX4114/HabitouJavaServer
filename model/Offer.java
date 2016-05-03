@@ -96,11 +96,11 @@ public class Offer {
     }
 
     boolean toBuy() {
-        return type.equals("vendre") || type.equals("buy");
+        return type.equals("Vente");
     }
 
     boolean toRent() {
-        return type.equals("louer") || type.equals("rent");
+        return type.equals("Location");
     }
 
     public Double getPrice() {
