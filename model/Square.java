@@ -246,12 +246,12 @@ public class Square {
         return c.getScore(this, "Kindergarten");
     }
     
-    public Double getPollutionScorre(SquareCriteria c){
+    public Double getPollutionScore(SquareCriteria c){
         if(c.getPollution().equals("null"))
         {
             return -1.0;
         }
-        return c.getPollutionScore(this);
+        return c.getScore(this, "Pollution");
     }
     
     @Override
