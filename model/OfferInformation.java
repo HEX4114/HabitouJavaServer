@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,7 +87,9 @@ public class OfferInformation {
                 continue;
             } else if(criteria.getFloor()!=null && criteria.getFloor()<offer.getFloor()) {
                 continue;
-            } else if(criteria.getMaxPrice()!=null && criteria.getMaxPrice()<offer.getPrice()) {
+            } else if(criteria.getMaxPriceBuy()!=null && offer.toBuy() && criteria.getMaxPriceBuy()<offer.getPrice()) {
+                continue;
+            } else if(criteria.getMaxPriceRent()!=null && offer.toRent() && criteria.getMaxPriceRent()<offer.getPrice()) {
                 continue;
             }
             OfferInformation of = new OfferInformation(offer);

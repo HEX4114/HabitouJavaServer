@@ -35,7 +35,8 @@ public class GetSquareByIdServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
-        MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
+        MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo, request.getParameter("collection"));
+
         String id = request.getParameter("id");
         
         SquareCriteria criterions = getCriterions(request);
@@ -138,19 +139,9 @@ public class GetSquareByIdServlet extends HttpServlet {
         String kindergarten = request.getParameter("kindergarten");
         String pollution = request.getParameter("pollution");
         
-        Boolean car;
+        Boolean car = onCar.equals("y");
         
-        if(onCar.equals("y"))
-        {
-            car = true;
-        }
-        else
-        {
-            car = false;
-        }
-        
-        
-        SquareCriteria result = new SquareCriteria(car, atm, supermarket, doctor, kindergarten);
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket, doctor, kindergarten, pollution);
         
         return result;
     }
