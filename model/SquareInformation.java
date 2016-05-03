@@ -65,13 +65,28 @@ public class SquareInformation {
     private List<Double> makeScoreList(Square s, SquareCriteria c)
     {
         List<Double> scores = new ArrayList<>();
-        if(!c.getAtm().equals("null"))
+        if(c.getAtm() != null)
         {
-            scores.add(c.getScore(s, "Atm"));
+//            if(!c.getAtm().equals("null"))
+                scores.add(c.getScore(s, "Atm"));
         }
-        if(!c.getSupermarket().equals("null"))
+        if(c.getSupermarket() != null)
         {
-            scores.add(c.getScore(s, "Supermarket"));
+//            if(!c.getSupermarket().equals("null"))
+                scores.add(c.getScore(s, "Supermarket"));
+        }
+        if(c.getPollution() != null)
+        {
+//            if(!c.getPollution().equals("null"))
+                scores.add(c.getPollutionScore(s));
+        }
+        if(c.getDoctor() != null)
+        {
+            scores.add(c.getScore(s, "Doctor"));
+        }
+        if(c.getKindergarten() != null)
+        {
+            scores.add(c.getScore(s, "Kindergarten"));
         }
         if(!c.getAdress().equals("null"))
         {

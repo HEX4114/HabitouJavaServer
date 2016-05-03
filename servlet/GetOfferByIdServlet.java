@@ -48,6 +48,9 @@ public class GetOfferByIdServlet extends HttpServlet {
                 out.write("<type>" + offer.getType() + "</type>");
                 out.write("<price>" + offer.getPrice() + "</price>");
                 out.write("<link>" + offer.getLink() + "</link>");
+                out.write("<rooms>" + offer.getRooms()+ "</rooms>");
+                out.write("<floor>" + offer.getFloor()+ "</floor>");
+                out.write("<m2>" + offer.getM2()+ "</m2>");
             out.write("</offer>");
         out.write("</document>");
 

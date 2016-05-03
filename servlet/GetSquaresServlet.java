@@ -43,14 +43,15 @@ public class GetSquaresServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
-        MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
+        MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo, request.getParameter("collection"));
         
+
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         
         SquareCriteria criterions;
         try {
-            criterions = getCriterions(request);
+            criterions = getSquareCriteria(request);
         } catch(Exception e) {
             response.setStatus(204);
             return;
@@ -75,7 +76,8 @@ public class GetSquaresServlet extends HttpServlet {
         
     }
     
-    private SquareCriteria getCriterions(HttpServletRequest request) throws Exception {
+    
+    private SquareCriteria getSquareCriteria(HttpServletRequest request) throws Exception {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
@@ -88,21 +90,13 @@ public class GetSquaresServlet extends HttpServlet {
         } else {
             adressLocation = getLocationFromAdress(request.getParameter("adressstring"));
         }
+        String doctor = request.getParameter("doctor");
+        String kindergarten = request.getParameter("kindergarten");
+        String pollution = request.getParameter("pollution");
         
+        Boolean car = onCar.equals("y");        
         
-        Boolean car;
-        
-        if(onCar.equals("y")) {
-            car = true;
-        }
-        else {
-            car = false;
-        }
-        
-        
-        SquareCriteria result = new SquareCriteria(car, atm, supermarket, adress, adressLocation);
-        
-        return result;
+        return new SquareCriteria(car, atm, supermarket, adress, adressLocation, doctor, kindergarten, pollution);
     }
     
     private Adress getLocationFromAdress(String adressString) throws Exception {

@@ -5,13 +5,9 @@
  */
 package model;
 
+
 import com.squareup.okhttp.OkHttpClient;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import com.squareup.okhttp.Request;
-import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 
 /**
@@ -34,15 +30,26 @@ public class Square {
     
     private Adress adress;
 
+    private Doctor nearestDoctor;
+    
+    private Kindergarten nearestKindergarten;
+    
+    private Pollution pollution;
+
     public Square() {
     }
 
-    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Adress adress) {
+
+    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Adress adress, Doctor nearestDoctor, Kindergarten nearestKindergarten, Pollution pollution) {
+
         this.latitude = latitude;
         this.longitude = longitude;
         this.nearestAtm = nearestAtm;
         this.nearestSupermarket = nearestSupermarket;
         this.adress = adress;
+        this.nearestDoctor = nearestDoctor;
+        this.nearestKindergarten = nearestKindergarten;
+        this.pollution = pollution;
     }
  
     public String getId() {
@@ -168,6 +175,31 @@ public class Square {
         }
         return 0.0;
     }
+
+    public Doctor getNearestDoctor() {
+        return nearestDoctor;
+    }
+
+    public void setNearestDoctor(Doctor nearestDoctor) {
+        this.nearestDoctor = nearestDoctor;
+    }
+
+    public Kindergarten getNearestKindergarten() {
+        return nearestKindergarten;
+    }
+
+    public void setNearestKindergarten(Kindergarten nearestKindergarten) {
+        this.nearestKindergarten = nearestKindergarten;
+    }
+
+    public Pollution getPollution() {
+        return pollution;
+    }
+
+    public void setPollution(Pollution pollution) {
+        this.pollution = pollution;
+    }
+
     
     public Double getAtmScore(SquareCriteria c)
     {
@@ -186,6 +218,15 @@ public class Square {
         }
         return c.getScore(this, "Supermarket");
     }
+
+    public Double getDoctorScore(SquareCriteria c)
+    {
+        if(c.getDoctor().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getScore(this, "Doctor");
+    }
     
     public Double getAdressScore(SquareCriteria c)
     {
@@ -196,9 +237,26 @@ public class Square {
         return c.getScore(this, "Adress");
     }
     
+    public Double getKindergartenScore(SquareCriteria c)
+    {
+        if(c.getKindergarten().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getScore(this, "Kindergarten");
+    }
+    
+    public Double getPollutionScorre(SquareCriteria c){
+        if(c.getPollution().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getPollutionScore(this);
+    }
+    
     @Override
     public String toString() {
-        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString();
+        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString()+ " " + nearestDoctor.toString() + " "+ nearestKindergarten.toString();
     }
     
 }

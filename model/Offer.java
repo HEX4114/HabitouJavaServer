@@ -25,6 +25,12 @@ public class Offer {
 
     private String link;
 
+    private Integer rooms;
+
+    private Integer floor;
+
+    private Double m2;
+
     public Offer(String address, Double latitude, Double longitude, String type, Double price, String link) {
         this.address = address;
         this.latitude = latitude;
@@ -32,6 +38,18 @@ public class Offer {
         this.type = type;
         this.price = price;
         this.link = link;
+    }
+
+    public Offer(String address, Double latitude, Double longitude, String type, Double price, String link, Integer rooms, Integer floor, Double m2) {
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.type = type;
+        this.price = price;
+        this.link = link;
+        this.rooms = rooms;
+        this.floor = floor;
+        this.m2 = m2;
     }
 
     public Offer() {
@@ -77,6 +95,14 @@ public class Offer {
         this.type = type;
     }
 
+    boolean toBuy() {
+        return type.equals("vendre") || type.equals("buy");
+    }
+
+    boolean toRent() {
+        return type.equals("louer") || type.equals("rent");
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -93,11 +119,34 @@ public class Offer {
         this.link = link;
     }
 
-    @Override
-    public String toString() {
-        return "Offer{" + "id=" + id + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", type=" + type + ", price=" + price + ", link=" + link + '}';
+    public Integer getRooms() {
+        return rooms;
     }
 
-    
+    public void setRooms(Integer rooms) {
+        this.rooms = rooms;
+    }
+
+    public Integer getFloor() {
+        return floor;
+    }
+
+    public void setFloor(Integer floor) {
+        this.floor = floor;
+    }
+
+    public Double getM2() {
+        return m2;
+    }
+
+    public void setM2(Double m2) {
+        this.m2 = m2;
+    }
+
+    @Override
+    public String toString() {
+        return "Offer{" + "id=" + id + ", address=" + address + ", latitude=" + latitude + ", longitude=" + longitude + ", type=" + type + ", price=" + price + ", link=" + link 
+                + ", floor=" + floor + ", rooms=" + rooms + ", price=" + price + '}';
+    }
 
 }

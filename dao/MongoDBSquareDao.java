@@ -24,8 +24,9 @@ public class MongoDBSquareDao {
 
     private DBCollection col;
 
-    public MongoDBSquareDao(MongoClient mongo) {
-        this.col = mongo.getDB("habitoudb").getCollection("squares");
+    
+public MongoDBSquareDao(MongoClient mongo, String collection) {
+        this.col = mongo.getDB("habitoudb").getCollection(collection);
     }
 
     public Square createSquare(Square p) {

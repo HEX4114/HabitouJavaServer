@@ -24,7 +24,10 @@ public class OfferConverter {
                 .append("long", of.getLongitude())
                 .append("type", of.getType())
                 .append("price", of.getPrice())
-                .append("link", of.getLink());
+                .append("link", of.getLink())
+                .append("rooms", of.getRooms())
+                .append("floor", of.getFloor())
+                .append("m2", of.getM2());
 
         if (of.getId() != null) {
             builder = builder.append("_id", new ObjectId(of.getId()));
@@ -42,6 +45,9 @@ public class OfferConverter {
         of.setType((String) doc.get("type"));
         of.setPrice((Double) doc.get("price"));
         of.setLink((String) doc.get("link"));
+        of.setRooms((Integer) doc.get("rooms"));
+        of.setFloor((Integer) doc.get("floor"));
+        of.setM2((Double) doc.get("m2"));
         ObjectId id = (ObjectId) doc.get("_id");
         of.setId(id.toString());
         return of;

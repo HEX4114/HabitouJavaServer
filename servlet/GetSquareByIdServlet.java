@@ -26,10 +26,14 @@ import com.squareup.okhttp.Response;
 import model.Square;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
+
 import model.Adress;
 import model.SquareCriteria;
 import model.Drive;
 import model.Walk;
+
+import model.SquareCriteria;
+
  
 @WebServlet("/getSquareById")
 public class GetSquareByIdServlet extends HttpServlet {
@@ -42,7 +46,8 @@ public class GetSquareByIdServlet extends HttpServlet {
             HttpServletResponse response) throws ServletException, IOException {
         MongoClient mongo = (MongoClient) request.getServletContext()
                 .getAttribute("MONGO_CLIENT");
-        MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo);
+        MongoDBSquareDao squareDAO = new MongoDBSquareDao(mongo, request.getParameter("collection"));
+
         String id = request.getParameter("id");
         
         response.setContentType("text/xml");
@@ -116,6 +121,47 @@ public class GetSquareByIdServlet extends HttpServlet {
                     out.write("</drive>");
                     out.write("<score>" + square.getAdressScore(criterions) + "</score>");
                 out.write("</adress>");
+                out.write("<doctor>");
+                    out.write("<walk>");
+                        out.write("<name>" + square.getNearestDoctor().getWalk().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestDoctor().getWalk().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestDoctor().getWalk().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestDoctor().getWalk().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestDoctor().getWalk().getDistance() + "</distance>");
+                    out.write("</walk>");
+                    out.write("<drive>");
+                        out.write("<name>" + square.getNearestDoctor().getDrive().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestDoctor().getDrive().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestDoctor().getDrive().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestDoctor().getDrive().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestDoctor().getDrive().getDistance() + "</distance>");
+                    out.write("</drive>");
+                    out.write("<score>" + square.getDoctorScore(criterions) + "</score>");
+                out.write("</doctor>");
+                out.write("<kindergarten>");
+                    out.write("<walk>");
+                        out.write("<name>" + square.getNearestKindergarten().getWalk().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestKindergarten().getWalk().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestKindergarten().getWalk().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestKindergarten().getWalk().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestKindergarten().getWalk().getDistance() + "</distance>");
+                    out.write("</walk>");
+                    out.write("<drive>");
+                        out.write("<name>" + square.getNearestKindergarten().getDrive().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestKindergarten().getDrive().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestKindergarten().getDrive().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestKindergarten().getDrive().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestKindergarten().getDrive().getDistance() + "</distance>");
+                    out.write("</drive>");
+                    out.write("<score>" + square.getKindergartenScore(criterions) + "</score>");
+                out.write("</kindergarten>");
+                out.write("<pollution>");
+                    out.write("<name>" + square.getPollution().getName() + "</name>");
+                    out.write("<rate>" + square.getPollution().getRate() + "</rate>");
+                    out.write("<lati>" + square.getPollution().getLatitude() + "</lati>");
+                    out.write("<long>" + square.getPollution().getLongitude() + "</long>");
+                    out.write("<distance>" + square.getPollution().getDistance() + "</distance>");
+                out.write("</pollution>");
             out.write("</square>");
         out.write("</document>");
     }
@@ -135,19 +181,13 @@ public class GetSquareByIdServlet extends HttpServlet {
             adressLocation = getLocationFromAdress(request.getParameter("adressstring"));
         }
         
-        Boolean car;
+        String doctor = request.getParameter("doctor");
+        String kindergarten = request.getParameter("kindergarten");
+        String pollution = request.getParameter("pollution");
         
-        if(onCar.equals("y"))
-        {
-            car = true;
-        }
-        else
-        {
-            car = false;
-        }
+        Boolean car = onCar.equals("y");
         
-        SquareCriteria result = new SquareCriteria(car, atm, supermarket, adress, adressLocation);
-        
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket, adress, adressLocation, doctor, kindergarten, pollution);
         return result;
     }
     
