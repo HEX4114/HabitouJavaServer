@@ -13,7 +13,6 @@ package converter;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DBObject;
 import model.Pollution;
-import org.bson.types.ObjectId;
 
 /**
  *
