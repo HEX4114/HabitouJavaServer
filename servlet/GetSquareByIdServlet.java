@@ -84,6 +84,13 @@ public class GetSquareByIdServlet extends HttpServlet {
                     out.write("</drive>");
                     out.write("<score>" + square.getSupermarketScore(criterions) + "</score>");
                 out.write("</supermarket>");
+                out.write("<pollution>");
+                    out.write("<name>" + square.getPollution().getName() + "</name>");
+                    out.write("<rate>" + square.getPollution().getRate() + "</rate>");
+                    out.write("<lati>" + square.getPollution().getLatitude() + "</lati>");
+                    out.write("<long>" + square.getPollution().getLongitude() + "</long>");
+                    out.write("<distance>" + square.getPollution().getDistance() + "</distance>");
+                out.write("</pollution>");
             out.write("</square>");
         out.write("</document>");
     }
@@ -93,6 +100,7 @@ public class GetSquareByIdServlet extends HttpServlet {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
+        String pollution = request.getParameter("pollution");
         
         Boolean car;
         

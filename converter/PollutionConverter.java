@@ -36,7 +36,7 @@ public class PollutionConverter {
  
     // convert DBObject Object to Square
     // take special note of converting ObjectId to String
-    public static Pollution toSquare(DBObject doc) {
+    public static Pollution toPollution(DBObject doc) {
         Pollution p = new Pollution((String) doc.get("name"), (Double) doc.get("rate"), (Double) doc.get("lat"), (Double) doc.get("long"), (Double) doc.get("distance"));
      
         return p;

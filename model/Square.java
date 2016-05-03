@@ -20,15 +20,18 @@ public class Square {
     private Atm nearestAtm;
     
     private Supermarket nearestSupermarket;
+    
+    private Pollution pollution;
 
     public Square() {
     }
 
-    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket) {
+    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Pollution pollution) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.nearestAtm = nearestAtm;
         this.nearestSupermarket = nearestSupermarket;
+        this.pollution = pollution;
     }
  
     public String getId() {
