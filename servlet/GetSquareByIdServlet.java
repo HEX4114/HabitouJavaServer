@@ -170,6 +170,7 @@ public class GetSquareByIdServlet extends HttpServlet {
                     out.write("<lati>" + square.getPollution().getLatitude() + "</lati>");
                     out.write("<long>" + square.getPollution().getLongitude() + "</long>");
                     out.write("<distance>" + square.getPollution().getDistance() + "</distance>");
+                    out.write("<score>" + criterions.getPollutionScore(square) + "</score>");
                 out.write("</pollution>");
             out.write("</square>");
         out.write("</document>");
