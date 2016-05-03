@@ -27,7 +27,7 @@ import model.Square;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
 import model.Adress;
-import model.Criterions;
+import model.SquareCriteria;
 import model.Drive;
 import model.Walk;
  
@@ -48,7 +48,7 @@ public class GetSquareByIdServlet extends HttpServlet {
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         
-        Criterions criterions;
+        SquareCriteria criterions;
         try {
             criterions = getCriterions(request);
         } catch(Exception e) {
@@ -121,7 +121,7 @@ public class GetSquareByIdServlet extends HttpServlet {
     }
     
     
-    private Criterions getCriterions(HttpServletRequest request) throws Exception {
+    private SquareCriteria getCriterions(HttpServletRequest request) throws Exception {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
@@ -146,7 +146,7 @@ public class GetSquareByIdServlet extends HttpServlet {
             car = false;
         }
         
-        Criterions result = new Criterions(car, atm, supermarket, adress, adressLocation);
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket, adress, adressLocation);
         
         return result;
     }

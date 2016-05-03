@@ -26,7 +26,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
-import model.Criterions;
+import model.SquareCriteria;
 import model.SquareInformation;
 import model.Adress;
 import model.Walk;
@@ -48,7 +48,7 @@ public class GetSquaresServlet extends HttpServlet {
         response.setContentType("text/xml");
         response.setHeader("Cache-Control", "no-cache");
         
-        Criterions criterions;
+        SquareCriteria criterions;
         try {
             criterions = getCriterions(request);
         } catch(Exception e) {
@@ -75,7 +75,7 @@ public class GetSquaresServlet extends HttpServlet {
         
     }
     
-    private Criterions getCriterions(HttpServletRequest request) throws Exception {
+    private SquareCriteria getCriterions(HttpServletRequest request) throws Exception {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
@@ -100,7 +100,7 @@ public class GetSquaresServlet extends HttpServlet {
         }
         
         
-        Criterions result = new Criterions(car, atm, supermarket, adress, adressLocation);
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket, adress, adressLocation);
         
         return result;
     }

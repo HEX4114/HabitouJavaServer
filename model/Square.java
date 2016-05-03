@@ -169,7 +169,7 @@ public class Square {
         return 0.0;
     }
     
-    public Double getAtmScore(Criterions c)
+    public Double getAtmScore(SquareCriteria c)
     {
         if(c.getAtm().equals("null"))
         {
@@ -178,7 +178,7 @@ public class Square {
         return c.getScore(this, "Atm");
     }
     
-    public Double getSupermarketScore(Criterions c)
+    public Double getSupermarketScore(SquareCriteria c)
     {
         if(c.getSupermarket().equals("null"))
         {
@@ -187,7 +187,7 @@ public class Square {
         return c.getScore(this, "Supermarket");
     }
     
-    public Double getAdressScore(Criterions c)
+    public Double getAdressScore(SquareCriteria c)
     {
         if(c.getAdress().equals("null"))
         {
