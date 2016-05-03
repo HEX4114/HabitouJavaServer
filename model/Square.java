@@ -73,6 +73,16 @@ public class Square {
     public void setNearestSupermarket(Supermarket nearestSupermarket) {
         this.nearestSupermarket = nearestSupermarket;
     }
+
+    public Pollution getPollution() {
+        return pollution;
+    }
+
+    public void setPollution(Pollution pollution) {
+        this.pollution = pollution;
+    }
+    
+    
     
     public Double getAtmScore(SquareCriteria c)
     {
