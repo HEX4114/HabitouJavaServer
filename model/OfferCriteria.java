@@ -19,17 +19,20 @@ public class OfferCriteria {
     
     private Integer floor;
     
-    private Integer maxPrice;
+    private Integer maxPriceBuy;
+    
+    private Integer maxPriceRent;
 
     public OfferCriteria() {
     }
 
-    public OfferCriteria(Boolean toBuy, Boolean toRent, Integer rooms, Integer floor, Integer maxPrice) {
+    public OfferCriteria(Boolean toBuy, Boolean toRent, Integer rooms, Integer floor, Integer maxPriceBuy, Integer maxPriceRent) {
         this.toBuy = toBuy;
         this.toRent = toRent;
         this.rooms = rooms;
         this.floor = floor;
-        this.maxPrice = maxPrice;
+        this.maxPriceBuy = maxPriceBuy;
+        this.maxPriceRent = maxPriceRent;
     }
 
     public Boolean getToBuy() {
@@ -64,14 +67,20 @@ public class OfferCriteria {
         this.floor = floor;
     }
 
-    public Integer getMaxPrice() {
-        return maxPrice;
+    public Integer getMaxPriceBuy() {
+        return maxPriceBuy;
     }
 
-    public void setMaxPrice(Integer maxPrice) {
-        this.maxPrice = maxPrice;
+    public void setMaxPriceBuy(Integer maxPriceBuy) {
+        this.maxPriceBuy = maxPriceBuy;
     }
-    
-    
+
+    public Integer getMaxPriceRent() {
+        return maxPriceRent;
+    }
+
+    public void setMaxPriceRent(Integer maxPriceRent) {
+        this.maxPriceRent = maxPriceRent;
+    }
     
 }
