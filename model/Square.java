@@ -21,16 +21,22 @@ public class Square {
     
     private Supermarket nearestSupermarket;
     
+    private Doctor nearestDoctor;
+    
+    private Kindergarten nearestKindergarten;
+    
     private Pollution pollution;
 
     public Square() {
     }
 
-    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Pollution pollution) {
+    public Square(Double latitude, Double longitude, Atm nearestAtm, Supermarket nearestSupermarket, Doctor nearestDoctor, Kindergarten nearestKindergarten, Pollution pollution) {
         this.latitude = latitude;
         this.longitude = longitude;
         this.nearestAtm = nearestAtm;
         this.nearestSupermarket = nearestSupermarket;
+        this.nearestDoctor = nearestDoctor;
+        this.nearestKindergarten = nearestKindergarten;
         this.pollution = pollution;
     }
  
@@ -73,6 +79,22 @@ public class Square {
     public void setNearestSupermarket(Supermarket nearestSupermarket) {
         this.nearestSupermarket = nearestSupermarket;
     }
+    
+    public Doctor getNearestDoctor() {
+        return nearestDoctor;
+    }
+
+    public void setNearestDoctor(Doctor nearestDoctor) {
+        this.nearestDoctor = nearestDoctor;
+    }
+
+    public Kindergarten getNearestKindergarten() {
+        return nearestKindergarten;
+    }
+
+    public void setNearestKindergarten(Kindergarten nearestKindergarten) {
+        this.nearestKindergarten = nearestKindergarten;
+    }
 
     public Pollution getPollution() {
         return pollution;
@@ -102,10 +124,28 @@ public class Square {
         return c.getScore(this, "Supermarket");
     }
     
+    public Double getDoctorScore(SquareCriteria c)
+    {
+        if(c.getDoctor().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getScore(this, "Doctor");
+    }
+    
+    public Double getKindergartenScore(SquareCriteria c)
+    {
+        if(c.getKindergarten().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getScore(this, "Kindergarten");
+    }
+    
     
     @Override
     public String toString() {
-        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString();
+        return latitude + " " + longitude + " " + nearestAtm.toString() + " "+ nearestSupermarket.toString()+ " " + nearestDoctor.toString() + " "+ nearestKindergarten.toString();
     }
     
 }

@@ -73,6 +73,14 @@ public class SquareInformation {
         {
             scores.add(c.getScore(s, "Supermarket"));
         }
+        if(!c.getDoctor().equals("null"))
+        {
+            scores.add(c.getScore(s, "Doctor"));
+        }
+        if(!c.getKindergarten().equals("null"))
+        {
+            scores.add(c.getScore(s, "Kindergarten"));
+        }
         
         return scores;
     }

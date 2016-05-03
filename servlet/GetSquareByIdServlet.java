@@ -84,6 +84,40 @@ public class GetSquareByIdServlet extends HttpServlet {
                     out.write("</drive>");
                     out.write("<score>" + square.getSupermarketScore(criterions) + "</score>");
                 out.write("</supermarket>");
+                out.write("<doctor>");
+                    out.write("<walk>");
+                        out.write("<name>" + square.getNearestDoctor().getWalk().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestDoctor().getWalk().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestDoctor().getWalk().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestDoctor().getWalk().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestDoctor().getWalk().getDistance() + "</distance>");
+                    out.write("</walk>");
+                    out.write("<drive>");
+                        out.write("<name>" + square.getNearestDoctor().getDrive().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestDoctor().getDrive().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestDoctor().getDrive().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestDoctor().getDrive().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestDoctor().getDrive().getDistance() + "</distance>");
+                    out.write("</drive>");
+                    out.write("<score>" + square.getDoctorScore(criterions) + "</score>");
+                out.write("</doctor>");
+                out.write("<kindergarten>");
+                    out.write("<walk>");
+                        out.write("<name>" + square.getNearestKindergarten().getWalk().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestKindergarten().getWalk().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestKindergarten().getWalk().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestKindergarten().getWalk().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestKindergarten().getWalk().getDistance() + "</distance>");
+                    out.write("</walk>");
+                    out.write("<drive>");
+                        out.write("<name>" + square.getNearestKindergarten().getDrive().getName() + "</name>");
+                        out.write("<lati>" + square.getNearestKindergarten().getDrive().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getNearestKindergarten().getDrive().getLongitude() + "</long>");
+                        out.write("<time>" + square.getNearestKindergarten().getDrive().getTime() + "</time>");
+                        out.write("<distance>" + square.getNearestKindergarten().getDrive().getDistance() + "</distance>");
+                    out.write("</drive>");
+                    out.write("<score>" + square.getKindergartenScore(criterions) + "</score>");
+                out.write("</kindergarten>");
                 out.write("<pollution>");
                     out.write("<name>" + square.getPollution().getName() + "</name>");
                     out.write("<rate>" + square.getPollution().getRate() + "</rate>");
@@ -100,6 +134,8 @@ public class GetSquareByIdServlet extends HttpServlet {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
+        String doctor = request.getParameter("doctor");
+        String kindergarten = request.getParameter("kindergarten");
         String pollution = request.getParameter("pollution");
         
         Boolean car;
@@ -114,7 +150,7 @@ public class GetSquareByIdServlet extends HttpServlet {
         }
         
         
-        SquareCriteria result = new SquareCriteria(car, atm, supermarket);
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket, doctor, kindergarten);
         
         return result;
     }

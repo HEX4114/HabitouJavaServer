@@ -19,17 +19,23 @@ public class SquareCriteria {
     private String atm;
     
     private String supermarket;
+    
+    private String doctor;
+    
+    private String kindergarten;
    
     
     public SquareCriteria(){
         
     }
     
-    public SquareCriteria(Boolean onCar, String atm, String supermarket) {
+    public SquareCriteria(Boolean onCar, String atm, String supermarket, String doctor, String kindergarten) {
         
         this.onCar = onCar;
         this.atm = atm;
         this.supermarket = supermarket;
+        this.doctor = doctor;
+        this.kindergarten = kindergarten;
         
     }
 
@@ -57,6 +63,21 @@ public class SquareCriteria {
         this.supermarket = supermarket;
     }
 
+    public String getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(String doctor) {
+        this.doctor = doctor;
+    }
+
+    public String getKindergarten() {
+        return kindergarten;
+    }
+
+    public void setKindergarten(String kindergarten) {
+        this.kindergarten = kindergarten;
+    }
     
     private Double getMin(List<Double> listDouble)
     {
@@ -90,7 +111,18 @@ public class SquareCriteria {
             distanceOnFoot = s.getNearestSupermarket().getWalk().getTime();
             distanceOnCar = s.getNearestSupermarket().getDrive().getTime();
         }
-        
+        else if(typePlace.equals("Doctor"))
+        {
+            maxDistance = Double.parseDouble(doctor);
+            distanceOnFoot = s.getNearestDoctor().getWalk().getTime();
+            distanceOnCar = s.getNearestDoctor().getDrive().getTime();
+        }
+        else if(typePlace.equals("Kindergarten"))
+        {
+            maxDistance = Double.parseDouble(kindergarten);
+            distanceOnFoot = s.getNearestKindergarten().getWalk().getTime();
+            distanceOnCar = s.getNearestKindergarten().getDrive().getTime();
+        }
         
         Double result;
         if(distanceOnFoot <= maxDistance

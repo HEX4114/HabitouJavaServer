@@ -24,6 +24,8 @@ public class SquareConverter {
                 .append("lat", s.getLatitude()).append("long", s.getLongitude())
                 .append("atm", AtmConverter.toDBObject(s.getNearestAtm()))
                 .append("supermarket", SupermarketConverter.toDBObject(s.getNearestSupermarket()))
+                .append("doctor", DoctorConverter.toDBObject(s.getNearestDoctor()))
+                .append("kindergarten", KindergartenConverter.toDBObject(s.getNearestKindergarten()))
                 .append("pollution", PollutionConverter.toDBObject(s.getPollution()));
                 
         if (s.getId() != null)
@@ -39,6 +41,8 @@ public class SquareConverter {
         s.setLongitude((Double) doc.get("long"));
         s.setNearestAtm(AtmConverter.toAtm((DBObject) doc.get("atm")));
         s.setNearestSupermarket(SupermarketConverter.toSupermarket((DBObject) doc.get("supermarket")));
+        s.setNearestDoctor(DoctorConverter.toDoctor((DBObject) doc.get("doctor")));
+        s.setNearestKindergarten(KindergartenConverter.toKindergarten((DBObject) doc.get("kindergarten")));
         s.setPollution(PollutionConverter.toPollution((DBObject) doc.get("pollution")));
         ObjectId id = (ObjectId) doc.get("_id");
         s.setId(id.toString());
