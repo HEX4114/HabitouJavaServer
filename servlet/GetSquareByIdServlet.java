@@ -26,6 +26,7 @@ import com.squareup.okhttp.Response;
 import model.Square;
 import dao.MongoDBSquareDao;
 import java.io.PrintWriter;
+import java.util.List;
 
 import model.Adress;
 import model.SquareCriteria;
@@ -33,6 +34,7 @@ import model.Drive;
 import model.Walk;
 
 import model.SquareCriteria;
+import model.SquareInformation;
 
  
 @WebServlet("/getSquareById")
@@ -62,7 +64,14 @@ public class GetSquareByIdServlet extends HttpServlet {
         }
         
         Square square = squareDAO.readSquare(id);
-
+        
+        String carString = request.getParameter("car");
+        if(carString.equals("y")) {
+            square.loadAdressInformations(criterions.getAdressLocation(), true);
+        } else {
+            square.loadAdressInformations(criterions.getAdressLocation(), false);
+        }
+        
         PrintWriter out = response.getWriter();
         
         out.write("<document>");
@@ -106,18 +115,18 @@ public class GetSquareByIdServlet extends HttpServlet {
                 out.write("</supermarket>");
                 out.write("<adress>");
                     out.write("<walk>");
-                        out.write("<name>" + criterions.getAdressLocation().getWalk().getName() + "</name>");
-                        out.write("<lati>" + criterions.getAdressLocation().getWalk().getLatitude() + "</lati>");
-                        out.write("<long>" + criterions.getAdressLocation().getWalk().getLongitude() + "</long>");
-                        out.write("<time>" + criterions.getAdressLocation().getWalk().getTime() + "</time>");
-                        out.write("<distance>" + criterions.getAdressLocation().getWalk().getDistance() + "</distance>");
+                        out.write("<name>" + square.getAdress().getWalk().getName() + "</name>");
+                        out.write("<lati>" + square.getAdress().getWalk().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getAdress().getWalk().getLongitude() + "</long>");
+                        out.write("<time>" + square.getAdress().getWalk().getTime() + "</time>");
+                        out.write("<distance>" + square.getAdress().getWalk().getDistance() + "</distance>");
                     out.write("</walk>");
                     out.write("<drive>");
-                        out.write("<name>" + criterions.getAdressLocation().getDrive().getName() + "</name>");
-                        out.write("<lati>" + criterions.getAdressLocation().getDrive().getLatitude() + "</lati>");
-                        out.write("<long>" + criterions.getAdressLocation().getDrive().getLongitude() + "</long>");
-                        out.write("<time>" + criterions.getAdressLocation().getDrive().getTime() + "</time>");
-                        out.write("<distance>" + criterions.getAdressLocation().getDrive().getDistance() + "</distance>");
+                        out.write("<name>" + square.getAdress().getDrive().getName() + "</name>");
+                        out.write("<lati>" + square.getAdress().getDrive().getLatitude() + "</lati>");
+                        out.write("<long>" + square.getAdress().getDrive().getLongitude() + "</long>");
+                        out.write("<time>" + square.getAdress().getDrive().getTime() + "</time>");
+                        out.write("<distance>" + square.getAdress().getDrive().getDistance() + "</distance>");
                     out.write("</drive>");
                     out.write("<score>" + square.getAdressScore(criterions) + "</score>");
                 out.write("</adress>");
