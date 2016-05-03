@@ -5,6 +5,7 @@
  */
 package model;
 
+import java.awt.BorderLayout;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,7 +84,7 @@ public class OfferInformation {
                 continue;
             } else if(criteria.getToBuy()==false && criteria.getToRent()==false) {
                 continue;
-            }else if(criteria.getRooms()!=null && criteria.getRooms()<offer.getRooms()) {
+            } else if(criteria.getRooms()!=null && criteria.getRooms()<offer.getRooms()) {
                 continue;
             } else if(criteria.getFloor()!=null && criteria.getFloor()<offer.getFloor()) {
                 continue;
