@@ -128,7 +128,7 @@ public class SquareCriteria {
     
     public Double getPollutionScore(Square s){
         
-        Double maxRate = 0.0;
+        Double maxRate = Double.parseDouble(pollution);
         Double squarePollutionRate = s.getPollution().getRate();
         Double result;
         
