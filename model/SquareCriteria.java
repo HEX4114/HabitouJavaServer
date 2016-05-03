@@ -77,6 +77,7 @@ public class SquareCriteria {
 
     public void setKindergarten(String kindergarten) {
         this.kindergarten = kindergarten;
+    }
         
     public String getPollution() {
         return pollution;

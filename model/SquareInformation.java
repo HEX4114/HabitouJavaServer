@@ -67,24 +67,24 @@ public class SquareInformation {
         List<Double> scores = new ArrayList<>();
         if(c.getAtm() != null)
         {
-            if(!c.getAtm().equals("null"))
+//            if(!c.getAtm().equals("null"))
                 scores.add(c.getScore(s, "Atm"));
         }
         if(c.getSupermarket() != null)
         {
-            if(!c.getSupermarket().equals("null"))
+//            if(!c.getSupermarket().equals("null"))
                 scores.add(c.getScore(s, "Supermarket"));
         }
         if(c.getPollution() != null)
         {
-            if(!c.getPollution().equals("null"))
+//            if(!c.getPollution().equals("null"))
                 scores.add(c.getPollutionScore(s));
         }
-        if(!c.getDoctor().equals("null"))
+        if(c.getDoctor() != null)
         {
             scores.add(c.getScore(s, "Doctor"));
         }
-        if(!c.getKindergarten().equals("null"))
+        if(c.getKindergarten() != null)
         {
             scores.add(c.getScore(s, "Kindergarten"));
         }
