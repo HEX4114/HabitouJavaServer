@@ -78,7 +78,7 @@ public class SquareInformation {
         if(c.getPollution() != null)
         {
             if(!c.getPollution().equals("null"))
-                scores.add(c.getScore(s, "Supermarket"));
+                scores.add(c.getPollutionScore(s));
         }
         
         return scores;
