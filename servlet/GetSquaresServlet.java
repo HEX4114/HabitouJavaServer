@@ -65,9 +65,10 @@ public class GetSquaresServlet extends HttpServlet {
         String onCar = request.getParameter("car");
         String atm = request.getParameter("atm");
         String supermarket = request.getParameter("supermarket");
+        String pollution = request.getParameter("pollution");
         
         Boolean car = onCar.equals("y");        
         
-        return new SquareCriteria(car, atm, supermarket);
+        return new SquareCriteria(car, atm, supermarket, pollution);
     }
 }

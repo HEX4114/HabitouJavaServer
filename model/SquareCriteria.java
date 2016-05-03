@@ -19,18 +19,20 @@ public class SquareCriteria {
     private String atm;
     
     private String supermarket;
+    
+    private String pollution;
    
     
     public SquareCriteria(){
         
     }
     
-    public SquareCriteria(Boolean onCar, String atm, String supermarket) {
+    public SquareCriteria(Boolean onCar, String atm, String supermarket, String pollution) {
         
         this.onCar = onCar;
         this.atm = atm;
         this.supermarket = supermarket;
-        
+        this.pollution = pollution;
     }
 
     public Boolean isOnCar() {
@@ -57,6 +59,13 @@ public class SquareCriteria {
         this.supermarket = supermarket;
     }
 
+    public String getPollution() {
+        return pollution;
+    }
+
+    public void setPollution(String pollution) {
+        this.pollution = pollution;
+    }
     
     private Double getMin(List<Double> listDouble)
     {
@@ -108,6 +117,26 @@ public class SquareCriteria {
             
             result = 1 - ((minDistance - maxDistance)/maxDistance);
             
+            if(result < 0.0)
+            {
+                result = 0.00000000001;
+            }
+            
+        }
+        return result;
+    }
+    
+    public Double getPollutionScore(Square s){
+        
+        Double maxRate = 0.0;
+        Double squarePollutionRate = s.getPollution().getRate();
+        Double result;
+        
+        if(squarePollutionRate <= maxRate){
+            result = 1.0;
+        }
+        else{
+            result = 1 - ((squarePollutionRate - maxRate)/maxRate);
             if(result < 0.0)
             {
                 result = 0.00000000001;

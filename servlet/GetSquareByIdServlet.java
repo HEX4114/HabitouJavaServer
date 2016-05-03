@@ -102,19 +102,10 @@ public class GetSquareByIdServlet extends HttpServlet {
         String supermarket = request.getParameter("supermarket");
         String pollution = request.getParameter("pollution");
         
-        Boolean car;
-        
-        if(onCar.equals("y"))
-        {
-            car = true;
-        }
-        else
-        {
-            car = false;
-        }
+        Boolean car = onCar.equals("y");
         
         
-        SquareCriteria result = new SquareCriteria(car, atm, supermarket);
+        SquareCriteria result = new SquareCriteria(car, atm, supermarket, pollution);
         
         return result;
     }

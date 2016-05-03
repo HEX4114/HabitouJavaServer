@@ -102,6 +102,14 @@ public class Square {
         return c.getScore(this, "Supermarket");
     }
     
+    public Double getPollutionScorre(SquareCriteria c){
+        if(c.getPollution().equals("null"))
+        {
+            return -1.0;
+        }
+        return c.getPollutionScore(this);
+    }
+    
     
     @Override
     public String toString() {
