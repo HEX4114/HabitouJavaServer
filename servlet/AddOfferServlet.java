@@ -43,6 +43,9 @@ public class AddOfferServlet extends HttpServlet {
         
         String address = request.getParameter("address");
         String type = request.getParameter("type");
+        Integer nbroom = Integer.parseInt(request.getParameter("nbroom"));
+        Integer numfloor = Integer.parseInt(request.getParameter("numfloor"));
+        Double size = Double.parseDouble(request.getParameter("size"));
         String link = request.getParameter("link");
         Double price = Double.parseDouble(request.getParameter("price"));
         Double lat = null;
@@ -88,7 +91,7 @@ public class AddOfferServlet extends HttpServlet {
             }
             in.close();
 
-            Offer offer = new Offer(URLDecoder.decode(address, "UTF-8"), lat, lng, type, price, link);
+            Offer offer = new Offer(URLDecoder.decode(address, "UTF-8"), lat, lng, type, price, link, nbroom, numfloor, size);
 
             offer = offerDAO.createOffer(offer);
             uploadImageFile(request, response, offer.getId());
