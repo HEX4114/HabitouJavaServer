@@ -187,22 +187,27 @@ public class SquareCriteria {
     
     public Double getPollutionScore(Square s){
         
-        Double maxRate = Double.parseDouble(pollution);
-        Double squarePollutionRate = s.getPollution().getRate();
-        Double result;
-        
-        if(squarePollutionRate <= maxRate){
-            result = 1.0;
-        }
-        else{
-            result = 1 - ((squarePollutionRate - maxRate)/maxRate);
-            if(result < 0.0)
-            {
-                result = 0.00000000001;
+        if(!pollution.equals("null")) {
+            Double maxRate = Double.parseDouble(pollution);
+            Double squarePollutionRate = s.getPollution().getRate();
+            Double result;
+
+            if(squarePollutionRate <= maxRate){
+                result = 1.0;
             }
-            
+            else{
+                result = 1 - ((squarePollutionRate - maxRate)/maxRate);
+                if(result < 0.0)
+                {
+                    result = 0.00000000001;
+                }
+
+            }
+            return result;
         }
-        return result;
+        
+        return -1.0;
+        
     }
     
 }
