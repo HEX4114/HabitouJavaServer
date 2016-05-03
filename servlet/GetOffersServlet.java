@@ -69,7 +69,7 @@ public class GetOffersServlet extends HttpServlet {
 //            MongoClient mongo = new MongoClient();
 //            MongoDBOfferDao offerDAO = new MongoDBOfferDao(mongo);
 //    
-//            OfferCriteria criterions = new OfferCriteria(true, true, null, null, 350000, 560);
+//            OfferCriteria criterions = new OfferCriteria(true, false, null, null, 200000, null);
 //            //List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers());
 //            List<OfferInformation> offers = OfferInformation.convertOffers(offerDAO.readAllOffers(), criterions);
 //    
@@ -85,8 +85,8 @@ public class GetOffersServlet extends HttpServlet {
         String rent = request.getParameter("rent");
         String rooms = request.getParameter("rooms");
         String floor = request.getParameter("floor");
-        String maxPriceBuy = request.getParameter("priceBuy");
-        String maxPriceRent = request.getParameter("priceRent");
+        String maxPriceBuy = request.getParameter("pricebuy");
+        String maxPriceRent = request.getParameter("pricerent");
 
         OfferCriteria criteria = new OfferCriteria();
 
