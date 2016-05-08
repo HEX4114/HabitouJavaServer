@@ -201,7 +201,6 @@ public class SquareCriteria {
                 {
                     result = 0.00000000001;
                 }
-
             }
             return result;
         }
